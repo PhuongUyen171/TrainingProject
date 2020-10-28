@@ -76,3 +76,25 @@ Trong giai đoạn tiếp theo, Moji dự kiến sẽ tiếp tục mở mới c�
 <i>Thân mến!</i>
 <br />
 <br />
+<tbody>
+    <div class="my-list">
+        <span></span>
+    </div>
+</tbody>
+<script src="~/js/Store.js">
+    function LoadData() {
+        var ds = "";
+        fetch("/api/Store").then(response => {
+            response.json().then(result => {
+                let itemID = item.StoreID;
+                let itemName = item.StoreName;
+                ds += `<span>
+                    <b>${itemID}</b>,
+                    chi nhánh: ${itemName}
+                    </span>`;
+            })
+        });
+        document.getElementById("my-list").innerHTML = trHTML;
+    }
+    LoadData();
+</script>

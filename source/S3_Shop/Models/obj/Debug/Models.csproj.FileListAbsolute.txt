@@ -10,3 +10,14 @@ C:\Users\uyen.nguyen\Desktop\UyenThucTap\S3project\S3_Shop\Models\obj\Debug\Mode
 C:\Users\uyen.nguyen\Desktop\UyenThucTap\S3project\S3_Shop\Models\obj\Debug\Models.dll
 C:\Users\uyen.nguyen\Desktop\UyenThucTap\S3project\S3_Shop\Models\obj\Debug\Models.pdb
 C:\Users\uyen.nguyen\Desktop\UyenThucTap\S3project\S3_Shop\Models\obj\Debug\Models.csprojAssemblyReference.cache
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\bin\Debug\Models.dll.config
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\bin\Debug\Models.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\bin\Debug\Models.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\bin\Debug\EntityFramework.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\bin\Debug\EntityFramework.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\obj\Debug\Models.csproj.CopyComplete
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\obj\Debug\Models.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Models\obj\Debug\Models.pdb

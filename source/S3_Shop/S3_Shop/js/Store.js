@@ -7,8 +7,9 @@
 
         }
     }
-
+    
     LoadData() {
+        deb
         $.ajax({
             url: "/api/Store",
             method: "GET",
@@ -17,17 +18,16 @@
             dataType: "json"
         }).done(function (response) {
             debugger;
-            $('tbody').empty();
+            $('.grid tbody').empty();
             $.each(response, function (index, item) {
                 var trHTML = $(`<tr>
-                    <td>`+ item.StoreID + `</td>
-                    <td>`+ item.StoreName + `</td>
+                    <td>`+ item.StoreID +`</td>
+                    <td>`+item.StoreName+`</td>
                 </tr >`);
-                $('tbody').append(trHTML);
+                $('.grid tbody').append(trHTML);
             })
         }).fail(function (response) {
             alert("Đã có lỗi xảy ra.");
         })
-        document.getElementById("tbody").innerHTML = trHTML;
     }
 }

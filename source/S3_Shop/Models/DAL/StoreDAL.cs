@@ -9,26 +9,78 @@ namespace Models.DAL
 {
     public class StoreDAL
     {
-        S3ShopDbContext db = new S3ShopDbContext();
+        private S3ShopDbContext db;
 
         public StoreDAL()
         {
+            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
 
-        public IEnumerable<STORE> GetAllStories()
+        #region CRUD
+        public bool CreateStore(STORE s)
         {
-            return db.STOREs.Select(t => t);
+            try
+            {
+                db.STOREs.Add(s);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+        }
+        public bool UpdateStore(STORE s)
+        {
+            try
+            {
+                var itemUpdate = db.STOREs.Find(s.StoreID);
+                itemUpdate.Phone = s.Phone;
+                itemUpdate.Location = s.Location;
+                itemUpdate.Images = s.Images;
+                itemUpdate.City = s.City;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+        }
+        public bool DeleteStore(STORE s)
+        {
+            try
+            {
+                var itemDelete = db.STOREs.Find(s.StoreID);
+                db.STOREs.Remove(itemDelete);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public List<STORE> GetAllStories()
+        {
+            return db.STOREs.Select(t => t).ToList();
+        }
+        public bool CheckStoreExist(int id)
+        {
+            return db.STOREs.Any(t=>t.StoreID==id);
         }
 
+        #endregion
         public STORE GetStoryByID(int id)
         {
             return db.STOREs.Where(t=>t.StoreID==id).FirstOrDefault();
         }
-
-        public IEnumerable<STORE> GetStoriesByLocation(string local)
+        public List<STORE> GetStoriesByLocation(string local)
         {
-            return db.STOREs.Where(t => t.Location == local);
+            return db.STOREs.Where(t => t.Location == local).ToList();
         }
     }
 }

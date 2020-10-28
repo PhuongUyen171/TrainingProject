@@ -254,6 +254,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="js\Store.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -289,6 +290,7 @@
     <Content Include="Views\Home\VanHoa.cshtml" />
     <Content Include="Views\Shared\CategoryPartial.cshtml" />
     <Content Include="Views\Home\GetCategory.cshtml" />
+    <Content Include="Views\Home\TinTuc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

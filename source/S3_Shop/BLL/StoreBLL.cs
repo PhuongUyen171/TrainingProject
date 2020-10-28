@@ -10,7 +10,7 @@ namespace BLL
 {
     public class StoreBLL
     {
-        StoreDAL s = new StoreDAL();
+        StoreDAL s;
         public StoreBLL() 
         {
             s = new StoreDAL();
@@ -27,5 +27,12 @@ namespace BLL
         {
             return s.GetStoriesByLocation(local);
         }
+
+        #region CRUD
+        public void CreatNewStore(STORE s)
+        {
+           
+        }
+        #endregion
     }
 }
