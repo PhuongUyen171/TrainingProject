@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a70db5e2416c4adcbf99f237f7c5aae4" Name="Diagram1">
+        <EntityTypeShape EntityType="S3ShopModel.BILL" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.BILLINFO" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.CATEGORY" Width="1.5" PointX="5.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.CUSTOMER" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.EMPLOYEE" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.GROUPADMIN" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.MEMBERSHIP" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.NEWS" Width="1.5" PointX="7.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.PERMISION" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.PRODUCT" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.ROLE" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.STORE" Width="1.5" PointX="9.75" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="S3ShopModel.VOUCHER" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <AssociationConnector Association="S3ShopModel.FK__BILL__CustomID__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__BILL__EmployID__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__BILL__VoucherID__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__BILLINFO__BillID__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__BILLINFO__Produc__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__CUSTOMER__MemID__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__EMPLOYEE__GroupI__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__PERMISION__Group__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__PERMISION__RoleI__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="S3ShopModel.FK__PRODUCT__Categor__20C1E124" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

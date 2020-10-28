@@ -1,0 +1,13 @@
+﻿<link href="../../Content/cssMain.css" rel="stylesheet" />
+<div class="header">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <a href="@Url.Action("GetCategory", "Home", new {id=item.CategoryID })">
+                    @item.CategoryName
+                </a>
+            </li>
+        }
+    </ul>
+</div>
