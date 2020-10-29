@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\RoleDAL.cs" />
     <Compile Include="DAL\StoreDAL.cs" />
     <Compile Include="EF\BILL.cs">
       <DependentUpon>S3ShopModel.tt</DependentUpon>

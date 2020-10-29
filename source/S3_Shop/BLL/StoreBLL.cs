@@ -10,7 +10,7 @@ namespace BLL
 {
     public class StoreBLL
     {
-        StoreDAL s = new StoreDAL();
+        private StoreDAL s;
         public StoreBLL() 
         {
             s = new StoreDAL();

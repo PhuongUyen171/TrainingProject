@@ -13,3 +13,17 @@ C:\Users\uyen.nguyen\Desktop\UyenThucTap\S3project\S3_Shop\BLL\bin\Debug\BLL.dll
 C:\Users\uyen.nguyen\Desktop\UyenThucTap\S3project\S3_Shop\BLL\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\uyen.nguyen\Desktop\UyenThucTap\S3project\S3_Shop\BLL\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\uyen.nguyen\Desktop\UyenThucTap\S3project\S3_Shop\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\BLL.dll.config
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\BLL.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\BLL.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\EntityFramework.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\Models.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\EntityFramework.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\Models.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\Models.dll.config
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\obj\Debug\BLL.csproj.CopyComplete
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\obj\Debug\BLL.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\obj\Debug\BLL.pdb

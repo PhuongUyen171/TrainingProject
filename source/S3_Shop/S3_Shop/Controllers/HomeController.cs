@@ -43,9 +43,9 @@ namespace S3_Shop.Controllers
             return View();
         }
 
-        public ActionResult GetCategory()
+        public ActionResult TinTuc()
         {
-            return PartialView();
+            return View();
         }
 
         
