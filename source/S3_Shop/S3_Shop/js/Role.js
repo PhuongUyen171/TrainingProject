@@ -15,37 +15,64 @@ class Role {
         }
     }
     LoadData() {
-        try {
-            $('tbody').empty();
-            $.ajax({
-                url: "http://localhost:44393/api/Role",
-                method: "GET",
-                //data: {},
-                dataType: "json",
-                contentType: "application/json",
-            }).done(function (response) {
-                //if (response) {
-                //    // Đọc dữ liệu và gen dữ liệu từng khách hàng với HTML:
-                //    $.each(response, function (index, item) {
-                //        var customerInfoHTML = $(`<tr>
-                //                <td>`+ item['RoleID'] + `</td>
-                //                <td>`+ item['RoleName'] + `</td>
-                //            </tr>`);
-                //        customerInfoHTML.data("id", item['RoleID']);
-                //        $('tbody').append(customerInfoHTML);
-                //    })
-                //    // Mặc định chọn bản ghi đầu tiên có trong danh sách:
-                //    //$('tbody tr').first().addClass('row-selected');
-                //}
-                alert('Có lỗi xảy ra')
-            }).fail(function (response) {
-                debugger;
-                alert("Có lỗi xảy ra trong lúc debug");
-            })
+        //try {
+        //    $('tbody').empty();
+        //        debugger;
+        //    $.ajax({
+        //        url: "/api/Role",
+        //        method: "GET",
+        //        data: {},
+        //        dataType: "json",
+        //        contentType: "application/json",
+        //    }).done(function (response) {
+        //        if (response) {
+        //             Đọc dữ liệu và gen dữ liệu từng khách hàng với HTML:
+        //            $.each(response, function (index, item) {
+        //                var customerInfoHTML = $(`<tr>
+        //                        <td>`+ item.RoleID + `</td>
+        //                        <td>`+ item.RoleName + `</td>
+        //                    </tr>`);
+        //                customerInfoHTML.data("id", item['RoleID']);
+        //                $('tbody').append(customerInfoHTML);
+        //            })
+        //             Mặc định chọn bản ghi đầu tiên có trong danh sách:
+        //            $('tbody tr').first().addClass('row-selected');
+        //        }
+        //        alert('Có lỗi xảy ra')
+        //    }).fail(function (response) {
+        //        debugger;
+        //        alert("Có lỗi xảy ra trong lúc debug");
+        //    })
 
-        } catch (e) {
-            console.log(e);
-        }
+        //} catch (e) {
+        //    console.log(e);
+        //}
+
+        //Code test
+        $.ajax({
+
+            url: "http://localhost/shopmoji/api/Role",
+            type: "GET",
+            dataType: 'json',
+            
+            success: function (result) {
+                debugger;
+                $("tbody").empty();
+                $.each(result, function (index, item) {
+                    var dataRow = '<tr>' +
+                        '<td>' + item.RoleID + '</td>' +
+                        '<td>' + item.RoleName+'</td>'
+                    '</tr>';
+                    $("tbody").append(dataRow);
+                });
+                console.log(result);
+            },
+            fail: function () {
+                debugger;
+                alert("Có lỗi xảy ra");
+            }
+        });
+
         //$('tbody').empty();
         //$.each(ds, function (index, item) {
         //    var trHTML = $(`<tr>'>

@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryBLL.cs" />
+    <Compile Include="ProductBLL.cs" />
     <Compile Include="RoleBLL.cs" />
     <Compile Include="StoreBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -15,7 +15,7 @@ namespace BLL
         {
             s = new StoreDAL();
         }
-        public IEnumerable<STORE> GetAllStories()
+        public List<STORE> GetAllStories()
         {
             return s.GetAllStories();
         }
@@ -23,9 +23,24 @@ namespace BLL
         {
             return s.GetStoryByID(id);
         }
-        public IEnumerable<STORE> GetStoreByLocation(string local)
+        public List<STORE> GetStoreByLocation(string local)
         {
             return s.GetStoriesByLocation(local);
         }
+
+        #region Insert, update, delete
+        public bool InsertStore(STORE store)
+        {
+            return s.CreateStore(store);
+        }
+        public bool UpdateStore(STORE store)
+        {
+            return s.UpdateStore(store);
+        }
+        public bool DeleteStore(int id)
+        {
+            return s.DeleteStore(id);
+        }
+        #endregion
     }
 }
