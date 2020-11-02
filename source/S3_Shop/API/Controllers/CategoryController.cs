@@ -1,31 +1,43 @@
 ﻿using BLL;
-using Models.EF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
-    public class CategoryController : ControllerBase
+    public class CategoryController : ApiController
     {
-        private readonly StoreBLL st;
-        public CategoryController()
+        // GET: api/Category
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        [HttpGet]
+        public List<Model.CategoryModel> GetAllCategories()
         {
-            st = new StoreBLL();
+            return new CategoryBLL().GetAllCategories();
         }
-        // GET: Category
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<STORE>>> GetSTOREs()
+
+        // GET: api/Category/5
+        //public string Get(int id)
         //{
-        //    return await st.GetAllStories();
+        //    return "value";
         //}
 
-        protected override void ExecuteCore()
+        // POST: api/Category
+        public void Post([FromBody]string value)
         {
-            throw new NotImplementedException();
+        }
+
+        // PUT: api/Category/5
+        public void Put(int id, [FromBody]string value)
+        {
+        }
+
+        // DELETE: api/Category/5
+        public void Delete(int id)
+        {
         }
     }
 }

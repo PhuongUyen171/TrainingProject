@@ -1,5 +1,5 @@
-﻿using Models.DAL;
-using Models.EF;
+﻿using BLL.Common;
+using DAL.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,33 +10,17 @@ namespace BLL
 {
     public class CategoryBLL
     {
-        private CategoryDAL c;
-        public CategoryBLL()
+        CategoryDAL cate = new CategoryDAL();
+        public List<Model.CategoryModel> GetAllCategories()
         {
-            c = new CategoryDAL();
+            EntityMapper<DAL.EF.CATEGORY, Model.CategoryModel> mapObj = new EntityMapper<DAL.EF.CATEGORY, Model.CategoryModel>();
+            List<DAL.EF.CATEGORY> cateList = new CategoryDAL().GetAllCategories();
+            List<Model.CategoryModel> categories = new List<Model.CategoryModel>();
+            foreach (var item in cateList)
+            {
+                categories.Add(mapObj.Translate(item));
+            }
+            return (List<Model.CategoryModel>)categories;
         }
-        public List<CATEGORY> GetAllCategory()
-        {
-            return c.GetAllCategories();
-        }
-        public CATEGORY GetDetailCategory(int id)
-        {
-            return c.GetCategoryByID(id);
-        }
-
-        #region Insert, Update, Delete
-        public bool InsertCategory(CATEGORY cate)
-        {
-            return c.CreateCategory(cate);
-        }
-        public bool DeleteCategory(int id)
-        {
-            return c.DeteleCategory(id);
-        }
-        public bool UpdateCategory(CATEGORY cate)
-        {
-            return c.UpdateCategory(cate);
-        }
-        #endregion
     }
 }
