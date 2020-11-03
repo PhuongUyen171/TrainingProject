@@ -44,6 +44,7 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Ra
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Webpages.Deployment.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Webpages.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Webpages.Razor.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Optimization.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Http.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Http.Cors.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Http.WebHost.dll
@@ -65,6 +66,7 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.We
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Helpers.xml
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Mvc.xml
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Optimization.xml
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Http.Cors.xml
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Http.WebHost.xml
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\BLL.pdb
@@ -74,5 +76,3 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\DAL.dll.confi
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.csproj.CopyComplete
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.pdb
-C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Optimization.dll
-C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Web.Optimization.xml

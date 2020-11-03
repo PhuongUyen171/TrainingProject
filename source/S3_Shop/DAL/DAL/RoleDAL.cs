@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace DAL.DAL
 {
-    public static class RoleDAL
+    public class RoleDAL
     {
-        static S3ShopDbContext db;
-        static RoleDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public RoleDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
 
         #region CRUD
-        public static bool InsertRole(ROLE role)
+        public bool InsertRole(ROLE role)
         {
             try
             {
@@ -30,7 +29,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteRole(int id)
+        public bool DeleteRole(int id)
         {
             try
             {
@@ -47,7 +46,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateRole(ROLE role)
+        public bool UpdateRole(ROLE role)
         {
             try
             {
@@ -64,13 +63,13 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static List<ROLE> GetAllRoles()
+        public List<ROLE> GetAllRoles()
         {
             return db.ROLES.ToList();
         }
         #endregion
 
-        public static ROLE GetRoleByID(int id)
+        public ROLE GetRoleByID(int id)
         {
             return db.ROLES.Where(t => t.RoleID == id).FirstOrDefault();
         }

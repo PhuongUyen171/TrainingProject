@@ -7,20 +7,19 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class ProductDAL
+    public class ProductDAL
     {
-        static S3ShopDbContext db;
-        static ProductDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public ProductDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
         #region CRUD
-        public static List<PRODUCT> GetAllProducts()
+        public List<PRODUCT> GetAllProducts()
         {
             return db.PRODUCTs.ToList();
         }
-        public static bool InsertProduct(PRODUCT product)
+        public bool InsertProduct(PRODUCT product)
         {
             try
             {
@@ -33,7 +32,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateProduct(PRODUCT product)
+        public bool UpdateProduct(PRODUCT product)
         {
             try
             {
@@ -54,7 +53,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteProduct(int id)
+        public bool DeleteProduct(int id)
         {
             try
             {
@@ -71,10 +70,18 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static PRODUCT GetProductByID(int id)
+        #endregion
+        public PRODUCT GetProductByID(int id)
         {
             return db.PRODUCTs.Where(t => t.ProductID == id).FirstOrDefault();
         }
-        #endregion
-    }
+        public List<PRODUCT> GetProductsByCategoryID(int id)
+        {
+            return db.PRODUCTs.Where(t => t.CategoryID == id).Take(24).ToList();
+        }
+        public List<PRODUCT> GetNewProductsByCount(int count)
+        {
+            return db.PRODUCTs.OrderByDescending(n => n.ProductID).Take(count).ToList();
+        }
+    } 
 }

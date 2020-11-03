@@ -7,20 +7,19 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class CustomerDAL
+    public class CustomerDAL
     {
-        static S3ShopDbContext db;
-        static CustomerDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public CustomerDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
         #region CRUD
-        public static List<CUSTOMER> GetAllCustomers()
+        public List<CUSTOMER> GetAllCustomers()
         {
             return db.CUSTOMERs.ToList();
         }
-        public static bool InsertCustomer(CUSTOMER custom)
+        public bool InsertCustomer(CUSTOMER custom)
         {
             try
             {
@@ -33,7 +32,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteCustomer(int id)
+        public bool DeleteCustomer(int id)
         {
             try
             {
@@ -50,7 +49,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateCustomer(CUSTOMER custom)
+        public bool UpdateCustomer(CUSTOMER custom)
         {
             try
             {
@@ -75,9 +74,13 @@ namespace DAL.DAL
             }
         }
         #endregion
-        public static CUSTOMER GetCustomerByID(int id)
+        public CUSTOMER GetCustomerByID(int id)
         {
             return db.CUSTOMERs.Where(t => t.CustomID == id).FirstOrDefault();
+        }
+        public bool ChechCustomerExist(string username, string password)
+        {
+            return db.CUSTOMERs.Any(t => t.CustomName == username & t.Pass == password);
         }
     }
 }

@@ -1,0 +1,67 @@
+﻿@model UI.Models.LoginModel
+
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_LayoutIntroduce.cshtml";
+}
+<link href="../../Content/cssMain.css" rel="stylesheet" />
+<link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-3 col-sm-2"></div>
+    <div class="col-lg-6 col-sm-8">
+        <h2 style="color:#ffb0bd;text-align:center">ĐĂNG NHẬP</h2>
+        <input type="text" name="tendn" placeholder="Tên đăng nhập ..." style="width:100%;height:40px;border-radius:10px;margin-bottom:10px" />
+        <input type="text" name="matkhau" placeholder="Mật khẩu ..." style="width:100%;height:40px;border-radius:10px;margin-bottom:10px" />
+        <button type="submit" class="btn" style="background-color:#ffb0bd;color:white;width:100%;height:50px;border-radius:10px;margin-bottom:10px">Đăng nhập</button>
+        <a href="#">Quên mật khẩu?</a>
+        <p>Hoặc đăng nhập với tài khoản</p>
+        <button type="submit" class="btn btn-primary" style="width:100%;height:50px;border-radius:10px;margin-bottom:10px">Đăng nhập bằng Facebook</button>
+        <button type="submit" class="btn btn-danger" style="width:100%;height:50px;border-radius:10px;margin-bottom:10px">Đăng nhập bằng Google</button>
+    </div>
+    <div class="col-lg-3 col-sm-2"></div>
+</div>
+
+@*<div class="content">
+        @using (Html.BeginForm("Login", "User", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <h4>Đăng nhập</h4>
+                <hr />
+
+                <div class="form-group">
+                    <label class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Đăng nhập" class="btn btn-default" />
+                        <a class="btn btn-facebook" href="/User/LoginFacebook">
+                            <i class="fa fa-facebook"></i>
+                            Đăng nhập bằng Facebook
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>*@
+

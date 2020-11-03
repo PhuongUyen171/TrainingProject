@@ -22,5 +22,13 @@ namespace BLL
             }
             return (List<Model.CategoryModel>)categories;
         }
+        public Model.CategoryModel GetCategoryByID(int id)
+        {
+            EntityMapper<DAL.EF.CATEGORY, Model.CategoryModel> mapObj = new EntityMapper<DAL.EF.CATEGORY, Model.CategoryModel>();
+            DAL.EF.CATEGORY cate = new CategoryDAL().GetCategoryByID(id);
+            Model.CategoryModel result = new Model.CategoryModel();
+            result = mapObj.Translate(cate);
+            return result;
+        }
     }
 }

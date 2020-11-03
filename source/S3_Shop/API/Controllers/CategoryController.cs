@@ -18,7 +18,10 @@ namespace API.Controllers
         {
             return new CategoryBLL().GetAllCategories();
         }
-
+        public Model.CategoryModel GetCategoryByID(int id)
+        {
+            return new CategoryBLL().GetCategoryByID(id);
+        }
         // GET: api/Category/5
         //public string Get(int id)
         //{

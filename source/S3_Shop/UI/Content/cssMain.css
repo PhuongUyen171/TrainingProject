@@ -2,7 +2,9 @@
 @import url('bootstrap-theme.min.css');
 
 body {
+    font-size: 16px;
 }
+
 
 .header {
     background-color: #ffb0bd;
@@ -14,6 +16,7 @@ body {
     font-size: 16px;
     padding-left: 40px;
     padding-right: 40px;
+    font-size:16px;
 }
 
     .header ul li {
@@ -37,6 +40,7 @@ body {
     background-color: #ffb0bd;
     width: 100%;
     color: white;
+    font-size:16px;
 }
 
 .footerEnd {
@@ -46,12 +50,14 @@ body {
     text-align: center;
     margin-top: 5px;
     padding-top: 15px;
+    font-size:16px;
 }
 
 .header2 {
     color: #8a4762;
     height: 100px;
     text-align: center;
+    font-size:16px;
 }
 
 .tieuDe {
@@ -187,7 +193,7 @@ img {
         padding: 10px;
         box-sizing: border-box;
         opacity: 0;
-        text-align: center;
+        font-size:16px;
     }
 
     .tinTuc:hover .txt {

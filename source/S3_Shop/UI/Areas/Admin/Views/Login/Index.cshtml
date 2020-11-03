@@ -1,0 +1,27 @@
+﻿@model UI.Areas.Admin.Data.LoginModel
+@{
+    ViewBag.Title = "Đăng nhập admin";
+    Layout = null;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body style="background-color: #ffb0bd;">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div style="background-color:white;height:250px;width:500px;text-align:center;padding: 10px;margin-top:250px;">
+                <h1 style="font-size:25px; font-weight:bold; text-align:center;">ĐĂNG NHẬP ADMIN</h1>
+                <input type="text" placeholder="Tên đăng nhập ..." style="width:100%;height:40px;border-radius:10px;margin-bottom:10px;" />
+                <input type="password" placeholder="Mật khẩu ..." style="width:100%;height:40px;border-radius:10px;margin-bottom:10px;" />
+                <input type="checkbox" value="" id="RememberMe" style="margin-bottom:10px;"/>Nhớ mật khẩu
+                <button type="submit" class="btn" style="background-color:#ffb0bd;color:white;width:100%;height:50px;border-radius:10px;">ĐĂNG NHẬP</button>
+            </div>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</body>
+</html>

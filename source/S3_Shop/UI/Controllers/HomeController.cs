@@ -13,7 +13,13 @@ namespace UI.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            int num = 8;
+            var url = "https://localhost:44379/";
+            ServiceRepository serviceObj = new ServiceRepository();
+            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Product/GetNewProductsByCount?count="+num);
+            response.EnsureSuccessStatusCode();
+            List<Model.ProductModel> list = response.Content.ReadAsAsync<List<Model.ProductModel>>().Result;
+            return View(list);
         }
 
         public ActionResult ChinhSachBanHang()
@@ -60,7 +66,7 @@ namespace UI.Controllers
         {
             var url = "https://localhost:44379/";
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Category");
+            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Category/GetAllCategories");
             response.EnsureSuccessStatusCode();
             List<Model.CategoryModel> list = response.Content.ReadAsAsync<List<Model.CategoryModel>>().Result;
 
