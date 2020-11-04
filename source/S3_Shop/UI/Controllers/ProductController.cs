@@ -16,12 +16,11 @@ namespace UI.Controllers
         {
             return View();
         }
-        [Route("chi-tiet/{id}")]
         public ActionResult GetDetailProduct(int id)
         {
             var url = "https://localhost:44379/";
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Product/GetProductByID/" + id);
+            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Product_API/GetProductByID/" + id);
             response.EnsureSuccessStatusCode();
             Model.ProductModel result = response.Content.ReadAsAsync<Model.ProductModel>().Result;
             return View(result);
@@ -31,7 +30,7 @@ namespace UI.Controllers
             var url = "https://localhost:44379/";
             ServiceRepository serviceObj = new ServiceRepository();
             //List sản phẩm
-            HttpResponseMessage responseListProduct = serviceObj.GetResponse(url + "api/Product/GetProductsByCateID/" + id);
+            HttpResponseMessage responseListProduct = serviceObj.GetResponse(url + "api/Product_API/GetProductsByCateID/" + id);
             responseListProduct.EnsureSuccessStatusCode();
             List<Model.ProductModel> list = responseListProduct.Content.ReadAsAsync<List<Model.ProductModel>>().Result;
             //Tên danh mục

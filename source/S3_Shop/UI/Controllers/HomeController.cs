@@ -16,7 +16,7 @@ namespace UI.Controllers
             int num = 8;
             var url = "https://localhost:44379/";
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Product/GetNewProductsByCount?count="+num);
+            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Product_API/GetNewProductsByCount?count="+num);
             response.EnsureSuccessStatusCode();
             List<Model.ProductModel> list = response.Content.ReadAsAsync<List<Model.ProductModel>>().Result;
             return View(list);
@@ -66,7 +66,7 @@ namespace UI.Controllers
         {
             var url = "https://localhost:44379/";
             ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Category/GetAllCategories");
+            HttpResponseMessage response = serviceObj.GetResponse(url + "api/Category_API/GetAllCategories");
             response.EnsureSuccessStatusCode();
             List<Model.CategoryModel> list = response.Content.ReadAsAsync<List<Model.CategoryModel>>().Result;
 

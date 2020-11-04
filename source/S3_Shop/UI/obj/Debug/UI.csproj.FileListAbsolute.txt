@@ -29,7 +29,6 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\vbc.ex
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\vbc.rsp
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\VBCSCompiler.exe
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\API.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\EntityFramework.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\EntityFramework.SqlServer.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -76,3 +75,4 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\DAL.dll.confi
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.csproj.CopyComplete
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\API.dll

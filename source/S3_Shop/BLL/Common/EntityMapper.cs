@@ -28,6 +28,10 @@ namespace BLL.Common
             //Employee
             Mapper.CreateMap<Model.EmployeeModel, DAL.EF.EMPLOYEE>();
             Mapper.CreateMap<DAL.EF.EMPLOYEE, Model.EmployeeModel>();
+            //Membership
+            Mapper.CreateMap<Model.MembershipModel, DAL.EF.MEMBERSHIP>();
+            Mapper.CreateMap<DAL.EF.MEMBERSHIP, Model.MembershipModel>();
+
         }
         public TDestination Translate(TSource obj)
         {

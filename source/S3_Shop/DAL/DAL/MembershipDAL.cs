@@ -7,21 +7,20 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class MembershipDAL
+    public class MembershipDAL
     {
-        static S3ShopDbContext db;
-        static MembershipDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public MembershipDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
 
         #region CRUD
-        public static List<MEMBERSHIP> GetAllMembership()
+        public List<MEMBERSHIP> GetAllMembership()
         {
             return db.MEMBERSHIPs.ToList();
         }
-        public static bool InsertMembership(MEMBERSHIP membership)
+        public bool InsertMembership(MEMBERSHIP membership)
         {
             try
             {
@@ -34,7 +33,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteMembership(string id)
+        public bool DeleteMembership(string id)
         {
             try
             {
@@ -51,7 +50,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateMembership(MEMBERSHIP membership)
+        public bool UpdateMembership(MEMBERSHIP membership)
         {
             try
             {
@@ -72,11 +71,11 @@ namespace DAL.DAL
             }
         }
         #endregion
-        public static MEMBERSHIP GetMembershipByID(string id)
+        public MEMBERSHIP GetMembershipByID(string id)
         {
             return db.MEMBERSHIPs.FirstOrDefault(t => t.MemID == id);
         }
-        public static int GetCustomerByMemID(string id)
+        public int GetCustomerByMemID(string id)
         {
             return db.CUSTOMERs.Count(t => t.MemID == id);
         }

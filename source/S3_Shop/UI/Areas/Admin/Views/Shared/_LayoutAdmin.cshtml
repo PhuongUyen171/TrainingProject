@@ -1,0 +1,89 @@
+﻿<html>
+<header class="header clearfix">
+    <button type="button" id="toggleMenu" class="toggle_menu">
+        <i class="fa fa-bars"></i>
+    </button>
+    <h1>
+        @*<img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/vertical-responsive-menu/img/logo_hocwebgiare.png" alt="" width="64" height="64" align="left">*@
+        MOJI
+    </h1>
+    <h2>ADMIN CONTROL PANEL</h2>
+    <script src="https://kit.fontawesome.com/c37e58ae3b.js" crossorigin="anonymous"></script>
+</header>
+<body>
+    <nav class="vertical_nav" style="font-size:16px;">
+        <ul id="js-menu" class="menu">
+            <li class="menu--item">
+                <a href="@Url.Action("Index", "Membership")" class="menu--link">
+                    <i class="menu--icon  fas fa-fw fa-address-card"></i><span class="menu--label">Quản lý loại thẻ</span>
+                </a>
+            </li>
+            <li class="menu--item">
+                <a href="@Url.Action("Index", "Role")" class="menu--link">
+                    <i class="menu--icon  fas fa-fw fa-table"></i><span class="menu--label">Quản lý bảng</span>
+                </a>
+            </li>
+            <li class="menu--item  menu--item__has_sub_menu">
+                <label class="menu--link" title="Item 1">
+                    <i class="menu--icon  fa fa-fw fa-user"></i><span class="menu--label">Quản lý thành viên</span>
+                </label>
+                <ul class="sub_menu">
+                    <li class="sub_menu--item">
+                        <a href="#" class="sub_menu--link sub_menu--link__active">Danh mục 1</a>
+                    </li>
+                    <li class="sub_menu--item">
+                        <a href="#" class="sub_menu--link">Danh mục 2</a>
+                    </li>
+                    <li class="sub_menu--item">
+                        <a href="#" class="sub_menu--link">Danh mục 3</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu--item">
+                <a href="#" class="menu--link" title="Quản lý tin tức">
+                    <i class="menu--icon  fa fa-fw fa-briefcase"></i><span class="menu--label">Quản lý tin tức</span>
+                </a>
+            </li>
+            <li class="menu--item">
+                <a href="#" class="menu--link" title="Item 3">
+                    <i class="menu--icon  fa fa-fw fa-cog"></i><span class="menu--label">Quản lý đơn hàng</span>
+                </a>
+            </li>
+            <li class="menu--item  menu--item__has_sub_menu">
+                <label class="menu--link" title="Item 4">
+                    <i class="menu--icon  fa fa-fw fa-database"></i><span class="menu--label">Quản lý sản phẩm</span>
+                </label>
+                <ul class="sub_menu">
+                    <li class="sub_menu--item">
+                        <a href="#" class="sub_menu--link">Danh mục 1</a>
+                    </li>
+                    <li class="sub_menu--item">
+                        <a href="#" class="sub_menu--link">Danh mục 2</a>
+                    </li>
+                    <li class="sub_menu--item">
+                        <a href="#" class="sub_menu--link">Danh mục 3</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu--item">
+                <a href="#" class="menu--link" title="Item 5">
+                    <i class="menu--icon  fa fa-fw fa-lock"></i> <span class="menu--label">Thoát ra</span>
+                </a>
+            </li>
+        </ul>
+        <button id="collapse_menu" class="collapse_menu">
+            <i class="collapse_menu--icon  fa fa-fw"></i> <span class="collapse_menu--label">Đóng/Mở menu</span>
+        </button>
+    </nav>
+    <div class="wrapper">
+        @RenderBody()
+    </div>
+    
+</body>
+
+</html>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/cssAdmin.css" rel="stylesheet" />
+<script src="~/Areas/Admin/Content/hieuUngMenu.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">

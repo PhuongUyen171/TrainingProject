@@ -7,16 +7,15 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class EmployeeDAL
+    public class EmployeeDAL
     {
-        static S3ShopDbContext db;
-        static EmployeeDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public EmployeeDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
         #region CRUD
-        public static bool InsertEmployee(EMPLOYEE employee)
+        public bool InsertEmployee(EMPLOYEE employee)
         {
             try
             {
@@ -29,7 +28,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteEmployee(int id)
+        public bool DeleteEmployee(int id)
         {
             try
             {
@@ -46,7 +45,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateEmployee(EMPLOYEE employee)
+        public bool UpdateEmployee(EMPLOYEE employee)
         {
             try
             {
@@ -68,14 +67,18 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static List<EMPLOYEE> GetAllEmployees()
+        public List<EMPLOYEE> GetAllEmployees()
         {
             return db.EMPLOYEEs.ToList();
         }
         #endregion
-        public static EMPLOYEE GetEmployeeByID(int id)
+        public EMPLOYEE GetEmployeeByID(int id)
         {
             return db.EMPLOYEEs.Where(t => t.EmployID == id).FirstOrDefault();
+        }
+        public bool CheckEmployeeExist(string adminName,string pass)
+        {
+            return db.EMPLOYEEs.Any(t => t.EmployName==adminName & t.Pass == pass);
         }
     }
 }

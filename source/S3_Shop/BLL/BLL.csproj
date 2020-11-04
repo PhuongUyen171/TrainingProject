@@ -60,6 +60,8 @@
     <Compile Include="CategoryBLL.cs" />
     <Compile Include="Common\EntityMapper.cs" />
     <Compile Include="CustomerBLL.cs" />
+    <Compile Include="EmployeeBLL.cs" />
+    <Compile Include="MembershipBLL.cs" />
     <Compile Include="NewsBLL.cs" />
     <Compile Include="ProductBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using BLL.Common;
 using DAL.DAL;
+using DAL.EF;
+using Model;
 
 namespace BLL
 {
     public class CustomerBLL
     {
-        CustomerDAL custom = new CustomerDAL();
+        CustomerDAL customDal = new CustomerDAL();
         public List<Model.CustomerModel> GetAllCustomers()
         {
             EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel> mapObj = new EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel>();
@@ -26,6 +28,29 @@ namespace BLL
         {
             bool customer = new CustomerDAL().ChechCustomerExist(user, pass);
             return customer;
+        }
+        public bool InsertCustomer(Model.CustomerModel cusInsert)
+        {
+            EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel,CUSTOMER>();
+            CUSTOMER customObj  = mapObj.Translate(cusInsert);
+            return customDal.InsertCustomer(customObj);
+        }
+        public bool UpdateCustomer(Model.CustomerModel cusUpdate)
+        {
+            EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel, CUSTOMER>();
+            CUSTOMER customObj = mapObj.Translate(cusUpdate);
+            return customDal.UpdateCustomer(customObj);
+        }
+        public bool DeleteCustomer(int id)
+        {
+            return customDal.DeleteCustomer(id);
+        }
+        public CustomerModel GetCustomerByID(int id)
+        {
+            EntityMapper<CUSTOMER, CustomerModel> mapObj = new EntityMapper<CUSTOMER, CustomerModel>();
+            CUSTOMER cus = new CustomerDAL().GetCustomerByID(id);
+            CustomerModel result = mapObj.Translate(cus);
+            return result;
         }
     }
 }
