@@ -158,11 +158,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\Employee_APIController.cs" />
     <Compile Include="Areas\Admin\Controllers\Membership_APIController.cs" />
     <Compile Include="Areas\Admin\Controllers\Role_APIController.cs" />
     <Compile Include="Controllers\Category_APIController.cs" />
     <Compile Include="Controllers\News_APIController.cs" />
     <Compile Include="Controllers\Product_APIController.cs" />
+    <Compile Include="Controllers\Store_APIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -195,6 +197,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Employee_API\" />
     <Folder Include="Areas\Admin\Views\Membership\" />
     <Folder Include="Areas\Admin\Views\Role\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
@@ -202,6 +205,7 @@
     <Folder Include="Views\News\" />
     <Folder Include="Views\Product\" />
     <Folder Include="Views\Role\" />
+    <Folder Include="Views\Store_API\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

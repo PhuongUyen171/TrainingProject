@@ -14,8 +14,17 @@ namespace DAL.EF
     
     public partial class CATEGORY
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CATEGORY()
+        {
+            this.PRODUCTs = new HashSet<PRODUCT>();
+        }
+    
         public int CateID { get; set; }
         public string CateName { get; set; }
         public string Images { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRODUCT> PRODUCTs { get; set; }
     }
 }

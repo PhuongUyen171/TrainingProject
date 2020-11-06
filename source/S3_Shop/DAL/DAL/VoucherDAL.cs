@@ -7,21 +7,20 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class VoucherDAL
+    public class VoucherDAL
     {
-        static S3ShopDbContext db;
-        static VoucherDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public VoucherDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
 
         #region CRUD
-        public static List<VOUCHER> GetAllVouchers()
+        public List<VOUCHER> GetAllVouchers()
         {
             return db.VOUCHERs.ToList();
         }
-        public static bool InsertVoucher(VOUCHER voucher)
+        public bool InsertVoucher(VOUCHER voucher)
         {
             try
             {
@@ -34,7 +33,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateVoucher(VOUCHER voucher)
+        public bool UpdateVoucher(VOUCHER voucher)
         {
             try
             {
@@ -54,7 +53,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteVoucher(string id)
+        public bool DeleteVoucher(string id)
         {
             try
             {
@@ -72,7 +71,7 @@ namespace DAL.DAL
             }
         }
         #endregion 
-        public static VOUCHER GetVoucherByID(string id)
+        public VOUCHER GetVoucherByID(string id)
         {
             return db.VOUCHERs.FirstOrDefault(t=>t.VoucherID==id);
         }

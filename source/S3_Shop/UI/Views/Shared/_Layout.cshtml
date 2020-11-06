@@ -48,7 +48,6 @@
         </div>
     </div>
     @Html.Action("CategoryPartial", "Home")
-    @*<div class="container-fluid">*@
         <div class="row">
             <div class="col-lg-7 col-sm-12">
                 <div id="myCarousel" class="carousel slide border" data-ride="carousel">
@@ -85,7 +84,6 @@
                 <img src="../../Content/Image/sb_1582684376_29.png" />
             </div>
         </div>
-    @*</div>*@
     <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-10">@RenderBody()</div>
@@ -124,7 +122,7 @@
                 </ul>
             </div>
             <div class="col-lg-2">
-                <a href="@Url.Action("Index","Admin")">
+                <a href="~/Admin/Login/Login">
                     <img src="../../Content/Image/store_1580801513_542.png" width="100%" />
                 </a>
                 <p>Hãy kết nối với chúng mình.</p>
@@ -146,6 +144,6 @@
 </style>
 <script>
     $('#myCarousel').carousel({
-        interval: 2000
+        interval: 3000
     });
 </script>

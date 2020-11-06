@@ -51,6 +51,7 @@
     <Compile Include="BillInfoModel.cs" />
     <Compile Include="BillModel.cs" />
     <Compile Include="CategoryModel.cs" />
+    <Compile Include="Common\Constants.cs" />
     <Compile Include="CustomerModel.cs" />
     <Compile Include="EmployeeModel.cs" />
     <Compile Include="GroupAdminModel.cs" />

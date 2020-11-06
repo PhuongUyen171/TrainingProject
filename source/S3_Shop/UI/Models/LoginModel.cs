@@ -10,11 +10,16 @@ namespace UI.Models
     {
         [Key]
         [Display(Name = "Tên đăng nhập")]
-        [Required(ErrorMessage = "Bạn phải nhập tài khoản.")]
+        [Required(ErrorMessage = "Tên đăng nhập không được để trống.")]
+        [StringLength(maximumLength: 500, MinimumLength = 5, ErrorMessage = "Tên đăng nhập nằm trong 5-500 kí tự")]
         public string UserName { set; get; }
 
-        [Required(ErrorMessage = "Bạn phải nhập mật khẩu.")]
+        [Required(ErrorMessage = "Mật khẩu không được để trống.")]
         [Display(Name = "Mật khẩu")]
         public string Password { set; get; }
+
+        public bool RememberMe { set; get; }
+
+        public LoginModel() { }
     }
 }

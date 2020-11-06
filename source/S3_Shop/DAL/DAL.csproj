@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Encrypt.cs" />
     <Compile Include="DAL\BillDAL.cs" />
     <Compile Include="DAL\BillInfoDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
@@ -72,7 +73,13 @@
     <Compile Include="EF\CATEGORY.cs">
       <DependentUpon>S3ShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\COUNTRY.cs">
+      <DependentUpon>S3ShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\CUSTOMER.cs">
+      <DependentUpon>S3ShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\DISTRICT.cs">
       <DependentUpon>S3ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\EMPLOYEE.cs">
@@ -93,6 +100,9 @@
     <Compile Include="EF\PRODUCT.cs">
       <DependentUpon>S3ShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\PROVINCE.cs">
+      <DependentUpon>S3ShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\ROLE.cs">
       <DependentUpon>S3ShopModel.tt</DependentUpon>
     </Compile>
@@ -111,10 +121,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>S3ShopModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EF\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>S3ShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\sp_helpdiagrams_Result.cs">
+      <DependentUpon>S3ShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\STORE.cs">
       <DependentUpon>S3ShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\sysdiagram.cs">
+      <DependentUpon>S3ShopModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\VOUCHER.cs">
+      <DependentUpon>S3ShopModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\WARD.cs">
       <DependentUpon>S3ShopModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

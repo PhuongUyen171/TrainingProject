@@ -10,6 +10,7 @@ namespace Model
     {
         public CustomerModel() { }
         public int CustomID { get; set; }
+        public string UserName { get; set; }
         public string CustomName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

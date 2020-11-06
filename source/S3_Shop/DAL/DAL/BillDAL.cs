@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,20 +9,19 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class BillDAL
+    public class BillDAL
     {
-        static S3ShopDbContext db;
-        static BillDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public BillDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
         #region CRUD
-        public static List<BILL> GetAllBills()
+        public List<BILL> GetAllBills()
         {
             return db.BILLs.ToList();
         }
-        public static bool InsertBill(BILL bill)
+        public bool InsertBill(BILL bill)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateBill(BILL bill)
+        public bool UpdateBill(BILL bill)
         {
             try
             {
@@ -58,14 +58,27 @@ namespace DAL.DAL
         }
         
         #endregion
-        public static BILL GetBillByID(int id)
+        public BILL GetBillByID(int id)
         {
             return db.BILLs.FirstOrDefault(t => t.BillID == id);
         }
-
-        public static List<BILLINFO> GetBillInfoByBillID(int id)
+        public List<BILLINFO> GetBillInfoByBillID(int id)
         {
             return db.BILLINFOes.Where(t => t.BillID == id).ToList();
+        }
+        public int? GetTotalBillByYear(DateTime date)
+        {
+            var total = (from t in db.BILLs
+                         where t.PublishDate.Value.Year == date.Year 
+                         select t).Sum(x => x.ToTalPrice);
+            return (total != null) ? total : 0;
+        }
+        public int? GetTotalPriceByBillInfo(int id)
+        {
+            var total = (from t in db.BILLINFOes
+                         where t.BillID == id
+                         select t).Sum(x => x.Price * x.Price);
+            return (total != null) ? total : 0;
         }
     }
 }

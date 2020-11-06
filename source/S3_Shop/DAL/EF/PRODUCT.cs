@@ -26,11 +26,10 @@ namespace DAL.EF
         public Nullable<int> Quantity { get; set; }
         public string Images { get; set; }
         public Nullable<bool> Statu { get; set; }
-        public Nullable<int> CategoryID { get; set; }
+        public Nullable<int> CateID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BILLINFO> BILLINFOes { get; set; }
-        public virtual PRODUCT PRODUCT1 { get; set; }
-        public virtual PRODUCT PRODUCT2 { get; set; }
+        public virtual CATEGORY CATEGORY { get; set; }
     }
 }

@@ -7,20 +7,19 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class GroupAdminDAL
+    public class GroupAdminDAL
     {
-        static S3ShopDbContext db;
-        static GroupAdminDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public GroupAdminDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
         #region CRUD
-        public static List<GROUPADMIN> GetAllGroupAdmin(string id)
+        public List<GROUPADMIN> GetAllGroupAdmins()
         {
             return db.GROUPADMINs.ToList();
         }
-        public static bool InsertGroupAdmin(GROUPADMIN group) {
+        public bool InsertGroupAdmin(GROUPADMIN group) {
             try
             {
                 db.GROUPADMINs.Add(group);
@@ -32,7 +31,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteGroupAdmin(string id)
+        public bool DeleteGroupAdmin(string id)
         {
             try
             {
@@ -49,7 +48,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateGroupAdmin(GROUPADMIN group)
+        public bool UpdateGroupAdmin(GROUPADMIN group)
         {
             try
             {
@@ -67,11 +66,11 @@ namespace DAL.DAL
             }
         }
         #endregion
-        public static GROUPADMIN GetGroupAdminByID(string id)
+        public GROUPADMIN GetGroupAdminByID(string id)
         {
             return db.GROUPADMINs.FirstOrDefault(t => t.GroupID == id);
         }
-        public static int GetEmployeeByGroupID(string id)
+        public int GetEmployeeByGroupID(string id)
         {
             return db.EMPLOYEEs.Count(t => t.GroupID == id);
         }

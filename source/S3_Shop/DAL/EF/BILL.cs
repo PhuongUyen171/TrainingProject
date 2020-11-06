@@ -26,7 +26,10 @@ namespace DAL.EF
         public Nullable<int> CustomID { get; set; }
         public Nullable<int> EmployID { get; set; }
         public Nullable<System.DateTime> DeliveryDate { get; set; }
+        public Nullable<int> ShippingCost { get; set; }
         public Nullable<int> Sale { get; set; }
+        public string Notes { get; set; }
+        public Nullable<bool> Payment { get; set; }
         public string VoucherID { get; set; }
     
         public virtual CUSTOMER CUSTOMER { get; set; }

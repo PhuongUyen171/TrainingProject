@@ -7,17 +7,16 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class StoreDAL
+    public class StoreDAL
     {
-        static S3ShopDbContext db;
-        static StoreDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public StoreDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
 
         #region CRUD
-        public static bool InsertStore(STORE store)
+        public bool InsertStore(STORE store)
         {
             try
             {
@@ -30,7 +29,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateStore(STORE store)
+        public bool UpdateStore(STORE store)
         {
             try
             {
@@ -50,7 +49,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteStore(int id)
+        public bool DeleteStore(int id)
         {
             try
             {
@@ -67,17 +66,17 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static List<STORE> GetAllStories()
+        public List<STORE> GetAllStories()
         {
             return db.STOREs.ToList();
         }
         #endregion
 
-        public static STORE GetStoryByID(int id)
+        public STORE GetStoryByID(int id)
         {
             return db.STOREs.Where(t => t.StoreID == id).FirstOrDefault();
         }
-        public static List<STORE> GetStoriesByLocation(string local)
+        public List<STORE> GetStoriesByLocation(string local)
         {
             return db.STOREs.Where(t => t.Location == local).ToList();
         }

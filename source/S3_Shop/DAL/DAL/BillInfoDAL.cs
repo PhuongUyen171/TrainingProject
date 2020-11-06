@@ -8,16 +8,15 @@ using DAL.EF;
 
 namespace DAL.DAL
 {
-    public static class BillInfoDAL
+    public class BillInfoDAL
     {
-        static S3ShopDbContext db;
-        static BillInfoDAL()
+        private S3ShopDbContext db = new S3ShopDbContext();
+        public BillInfoDAL()
         {
-            db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
         #region CRUD
-        public static bool InsertBillInfo(BILLINFO billInfo)
+        public bool InsertBillInfo(BILLINFO billInfo)
         {
             try
             {
@@ -30,7 +29,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool DeleteBillInfo(int billID,int productId)
+        public bool DeleteBillInfo(int billID,int productId)
         {
             try
             {
@@ -47,7 +46,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdateBillInfo(BILLINFO billInfo)
+        public bool UpdateBillInfo(BILLINFO billInfo)
         {
             try
             {
@@ -65,8 +64,12 @@ namespace DAL.DAL
                 return false;
             }
         }
+        public List<BILLINFO> GetAllBillInfoByID(int id)
+        {
+            return db.BILLINFOes.Where(t => t.BillID == id).ToList();
+        }
         #endregion
-        public static BILLINFO GetBillInfoByBillInforID(int billID, int productID)
+        public BILLINFO GetBillInfoByBillInforID(int billID, int productID)
         {
             return db.BILLINFOes.FirstOrDefault(t => t.BillID == billID & t.ProductID == productID);
         }

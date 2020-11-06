@@ -10,12 +10,15 @@
     <Property Name="CustomID" Type="Int32" />
     <Property Name="EmployID" Type="Int32" />
     <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="ShippingCost" Type="Int32" />
     <Property Name="Sale" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Payment" Type="Boolean" />
     <Property Name="VoucherID" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="CUSTOMER" Relationship="Self.FK__BILL__CustomID__2D27B809" FromRole="BILL" ToRole="CUSTOMER" />
     <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__BILL__EmployID__2E1BDC42" FromRole="BILL" ToRole="EMPLOYEE" />
-    <NavigationProperty Name="VOUCHER" Relationship="Self.FK__BILL__VoucherID__300424B4" FromRole="BILL" ToRole="VOUCHER" />
-    <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__BillID__32E0915F" FromRole="BILL" ToRole="BILLINFO" />
+    <NavigationProperty Name="VOUCHER" Relationship="Self.FK__BILL__VoucherID__30F848ED" FromRole="BILL" ToRole="VOUCHER" />
+    <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__BillID__33D4B598" FromRole="BILL" ToRole="BILLINFO" />
   </EntityType>
   <EntityType Name="BILLINFO">
     <Key>
@@ -26,8 +29,8 @@
     <Property Name="ProductID" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Price" Type="Int32" />
-    <NavigationProperty Name="BILL" Relationship="Self.FK__BILLINFO__BillID__32E0915F" FromRole="BILLINFO" ToRole="BILL" />
-    <NavigationProperty Name="PRODUCT" Relationship="Self.FK__BILLINFO__Produc__33D4B598" FromRole="BILLINFO" ToRole="PRODUCT" />
+    <NavigationProperty Name="BILL" Relationship="Self.FK__BILLINFO__BillID__33D4B598" FromRole="BILLINFO" ToRole="BILL" />
+    <NavigationProperty Name="PRODUCT" Relationship="Self.FK__BILLINFO__Produc__34C8D9D1" FromRole="BILLINFO" ToRole="PRODUCT" />
   </EntityType>
   <EntityType Name="CATEGORY">
     <Key>
@@ -36,17 +39,19 @@
     <Property Name="CateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CateName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PRODUCTs" Relationship="Self.FK__PRODUCT__CateID__20C1E124" FromRole="CATEGORY" ToRole="PRODUCT" />
   </EntityType>
   <EntityType Name="CUSTOMER">
     <Key>
       <PropertyRef Name="CustomID" />
     </Key>
     <Property Name="CustomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="CustomName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Statu" Type="Boolean" />
     <Property Name="TotalPrice" Type="Int32" />
     <Property Name="MemID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
@@ -61,7 +66,7 @@
     <Property Name="EmployName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Pass" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+    <Property Name="Pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Statu" Type="Boolean" />
     <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__EmployID__2E1BDC42" FromRole="EMPLOYEE" ToRole="BILL" />
@@ -74,7 +79,7 @@
     <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__GroupI__267ABA7A" FromRole="GROUPADMIN" ToRole="EMPLOYEE" />
-    <NavigationProperty Name="PERMISIONs" Relationship="Self.FK__PERMISION__Group__38996AB5" FromRole="GROUPADMIN" ToRole="PERMISION" />
+    <NavigationProperty Name="PERMISIONs" Relationship="Self.FK__PERMISION__Group__398D8EEE" FromRole="GROUPADMIN" ToRole="PERMISION" />
   </EntityType>
   <EntityType Name="MEMBERSHIP">
     <Key>
@@ -105,8 +110,8 @@
     <Property Name="RoleID" Type="Int32" Nullable="false" />
     <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
     <Property Name="PerID" Type="Boolean" />
-    <NavigationProperty Name="GROUPADMIN" Relationship="Self.FK__PERMISION__Group__38996AB5" FromRole="PERMISION" ToRole="GROUPADMIN" />
-    <NavigationProperty Name="ROLE" Relationship="Self.FK__PERMISION__RoleI__37A5467C" FromRole="PERMISION" ToRole="ROLES" />
+    <NavigationProperty Name="GROUPADMIN" Relationship="Self.FK__PERMISION__Group__398D8EEE" FromRole="PERMISION" ToRole="GROUPADMIN" />
+    <NavigationProperty Name="ROLE" Relationship="Self.FK__PERMISION__RoleI__38996AB5" FromRole="PERMISION" ToRole="ROLES" />
   </EntityType>
   <EntityType Name="PRODUCT">
     <Key>
@@ -118,10 +123,9 @@
     <Property Name="Quantity" Type="Int32" />
     <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Statu" Type="Boolean" />
-    <Property Name="CategoryID" Type="Int32" />
-    <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__Produc__33D4B598" FromRole="PRODUCT" ToRole="BILLINFO" />
-    <NavigationProperty Name="PRODUCT1" Relationship="Self.FK__PRODUCT__Categor__20C1E124" FromRole="PRODUCT" ToRole="PRODUCT1" />
-    <NavigationProperty Name="PRODUCT2" Relationship="Self.FK__PRODUCT__Categor__20C1E124" FromRole="PRODUCT1" ToRole="PRODUCT" />
+    <Property Name="CateID" Type="Int32" />
+    <NavigationProperty Name="BILLINFOes" Relationship="Self.FK__BILLINFO__Produc__34C8D9D1" FromRole="PRODUCT" ToRole="BILLINFO" />
+    <NavigationProperty Name="CATEGORY" Relationship="Self.FK__PRODUCT__CateID__20C1E124" FromRole="PRODUCT" ToRole="CATEGORY" />
   </EntityType>
   <EntityType Name="ROLE">
     <Key>
@@ -129,7 +133,7 @@
     </Key>
     <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="PERMISIONs" Relationship="Self.FK__PERMISION__RoleI__37A5467C" FromRole="ROLES" ToRole="PERMISION" />
+    <NavigationProperty Name="PERMISIONs" Relationship="Self.FK__PERMISION__RoleI__38996AB5" FromRole="ROLES" ToRole="PERMISION" />
   </EntityType>
   <EntityType Name="STORE">
     <Key>
@@ -141,6 +145,16 @@
     <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="VOUCHER">
     <Key>
       <PropertyRef Name="VoucherID" />
@@ -150,7 +164,78 @@
     <Property Name="Sale" Type="Int32" />
     <Property Name="EndDate" Type="DateTime" Precision="0" />
     <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__VoucherID__300424B4" FromRole="VOUCHER" ToRole="BILL" />
+    <NavigationProperty Name="BILLs" Relationship="Self.FK__BILL__VoucherID__30F848ED" FromRole="VOUCHER" ToRole="BILL" />
+  </EntityType>
+  <EntityType Name="COUNTRY">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="CountryCode" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CountryCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CommonName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FormalName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CountryType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CountrySubType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Sovereignty" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Capital" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CurrencyName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TelephoneCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CountryCode3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CountryNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="InternetCountryCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SortOrder" Type="Int32" />
+    <Property Name="IsPublished" Type="Boolean" />
+    <Property Name="Flags" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="DISTRICT">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="ProvinceId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LatiLongTude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+    <Property Name="SortOrder" Type="Int32" />
+    <Property Name="IsPublished" Type="Boolean" />
+    <Property Name="IsDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="PROVINCE">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="TelephoneCode" Type="Int32" />
+    <Property Name="ZipCode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CountryId" Type="Int32" Nullable="false" />
+    <Property Name="CountryCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Name="SortOrder" Type="Int32" />
+    <Property Name="IsPublished" Type="Boolean" />
+    <Property Name="IsDeleted" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="WARD">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="DistrictID" />
+      <PropertyRef Name="SortOrder" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LatiLongTude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictID" Type="Int32" Nullable="false" />
+    <Property Name="SortOrder" Type="Int32" Nullable="false" />
+    <Property Name="IsPublished" Type="Boolean" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <Association Name="FK__BILL__CustomID__2D27B809">
     <End Role="CUSTOMER" Type="Self.CUSTOMER" Multiplicity="0..1" />
@@ -176,7 +261,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BILL__VoucherID__300424B4">
+  <Association Name="FK__BILL__VoucherID__30F848ED">
     <End Role="VOUCHER" Type="Self.VOUCHER" Multiplicity="0..1" />
     <End Role="BILL" Type="Self.BILL" Multiplicity="*" />
     <ReferentialConstraint>
@@ -188,7 +273,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BILLINFO__BillID__32E0915F">
+  <Association Name="FK__BILLINFO__BillID__33D4B598">
     <End Role="BILL" Type="Self.BILL" Multiplicity="1" />
     <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -200,7 +285,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BILLINFO__Produc__33D4B598">
+  <Association Name="FK__BILLINFO__Produc__34C8D9D1">
     <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
     <End Role="BILLINFO" Type="Self.BILLINFO" Multiplicity="*" />
     <ReferentialConstraint>
@@ -209,6 +294,18 @@
       </Principal>
       <Dependent Role="BILLINFO">
         <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PRODUCT__CateID__20C1E124">
+    <End Role="CATEGORY" Type="Self.CATEGORY" Multiplicity="0..1" />
+    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CATEGORY">
+        <PropertyRef Name="CateID" />
+      </Principal>
+      <Dependent Role="PRODUCT">
+        <PropertyRef Name="CateID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -236,7 +333,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PERMISION__Group__38996AB5">
+  <Association Name="FK__PERMISION__Group__398D8EEE">
     <End Role="GROUPADMIN" Type="Self.GROUPADMIN" Multiplicity="1" />
     <End Role="PERMISION" Type="Self.PERMISION" Multiplicity="*" />
     <ReferentialConstraint>
@@ -248,7 +345,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PERMISION__RoleI__37A5467C">
+  <Association Name="FK__PERMISION__RoleI__38996AB5">
     <End Role="ROLES" Type="Self.ROLE" Multiplicity="1" />
     <End Role="PERMISION" Type="Self.PERMISION" Multiplicity="*" />
     <ReferentialConstraint>
@@ -257,18 +354,6 @@
       </Principal>
       <Dependent Role="PERMISION">
         <PropertyRef Name="RoleID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__PRODUCT__Categor__20C1E124">
-    <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
-    <End Role="PRODUCT1" Type="Self.PRODUCT" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="PRODUCT">
-        <PropertyRef Name="ProductID" />
-      </Principal>
-      <Dependent Role="PRODUCT1">
-        <PropertyRef Name="ProductID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -285,7 +370,12 @@
     <EntitySet Name="PRODUCTs" EntityType="Self.PRODUCT" />
     <EntitySet Name="ROLES" EntityType="Self.ROLE" />
     <EntitySet Name="STOREs" EntityType="Self.STORE" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="VOUCHERs" EntityType="Self.VOUCHER" />
+    <EntitySet Name="COUNTRies" EntityType="Self.COUNTRY" />
+    <EntitySet Name="DISTRICTs" EntityType="Self.DISTRICT" />
+    <EntitySet Name="PROVINCEs" EntityType="Self.PROVINCE" />
+    <EntitySet Name="WARDs" EntityType="Self.WARD" />
     <AssociationSet Name="FK__BILL__CustomID__2D27B809" Association="Self.FK__BILL__CustomID__2D27B809">
       <End Role="CUSTOMER" EntitySet="CUSTOMERs" />
       <End Role="BILL" EntitySet="BILLs" />
@@ -294,17 +384,21 @@
       <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
       <End Role="BILL" EntitySet="BILLs" />
     </AssociationSet>
-    <AssociationSet Name="FK__BILL__VoucherID__300424B4" Association="Self.FK__BILL__VoucherID__300424B4">
+    <AssociationSet Name="FK__BILL__VoucherID__30F848ED" Association="Self.FK__BILL__VoucherID__30F848ED">
       <End Role="VOUCHER" EntitySet="VOUCHERs" />
       <End Role="BILL" EntitySet="BILLs" />
     </AssociationSet>
-    <AssociationSet Name="FK__BILLINFO__BillID__32E0915F" Association="Self.FK__BILLINFO__BillID__32E0915F">
+    <AssociationSet Name="FK__BILLINFO__BillID__33D4B598" Association="Self.FK__BILLINFO__BillID__33D4B598">
       <End Role="BILL" EntitySet="BILLs" />
       <End Role="BILLINFO" EntitySet="BILLINFOes" />
     </AssociationSet>
-    <AssociationSet Name="FK__BILLINFO__Produc__33D4B598" Association="Self.FK__BILLINFO__Produc__33D4B598">
+    <AssociationSet Name="FK__BILLINFO__Produc__34C8D9D1" Association="Self.FK__BILLINFO__Produc__34C8D9D1">
       <End Role="PRODUCT" EntitySet="PRODUCTs" />
       <End Role="BILLINFO" EntitySet="BILLINFOes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PRODUCT__CateID__20C1E124" Association="Self.FK__PRODUCT__CateID__20C1E124">
+      <End Role="CATEGORY" EntitySet="CATEGORies" />
+      <End Role="PRODUCT" EntitySet="PRODUCTs" />
     </AssociationSet>
     <AssociationSet Name="FK__CUSTOMER__MemID__1920BF5C" Association="Self.FK__CUSTOMER__MemID__1920BF5C">
       <End Role="MEMBERSHIP" EntitySet="MEMBERSHIPs" />
@@ -314,17 +408,54 @@
       <End Role="GROUPADMIN" EntitySet="GROUPADMINs" />
       <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
     </AssociationSet>
-    <AssociationSet Name="FK__PERMISION__Group__38996AB5" Association="Self.FK__PERMISION__Group__38996AB5">
+    <AssociationSet Name="FK__PERMISION__Group__398D8EEE" Association="Self.FK__PERMISION__Group__398D8EEE">
       <End Role="GROUPADMIN" EntitySet="GROUPADMINs" />
       <End Role="PERMISION" EntitySet="PERMISIONs" />
     </AssociationSet>
-    <AssociationSet Name="FK__PERMISION__RoleI__37A5467C" Association="Self.FK__PERMISION__RoleI__37A5467C">
+    <AssociationSet Name="FK__PERMISION__RoleI__38996AB5" Association="Self.FK__PERMISION__RoleI__38996AB5">
       <End Role="ROLES" EntitySet="ROLES" />
       <End Role="PERMISION" EntitySet="PERMISIONs" />
     </AssociationSet>
-    <AssociationSet Name="FK__PRODUCT__Categor__20C1E124" Association="Self.FK__PRODUCT__Categor__20C1E124">
-      <End Role="PRODUCT" EntitySet="PRODUCTs" />
-      <End Role="PRODUCT1" EntitySet="PRODUCTs" />
-    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QL_ShopModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QL_ShopModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
 </Schema>

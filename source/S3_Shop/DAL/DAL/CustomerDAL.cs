@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.EF;
@@ -81,6 +82,31 @@ namespace DAL.DAL
         public bool ChechCustomerExist(string username, string password)
         {
             return db.CUSTOMERs.Any(t => t.CustomName == username & t.Pass == password);
+        }
+        public bool ChangeStatusCustomer(string username)
+        {
+            try
+            {
+                var acc = db.CUSTOMERs.SingleOrDefault(x => x.CustomName==username);
+                acc.Statu = !acc.Statu;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool LoginCustomer(string username, string pass)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

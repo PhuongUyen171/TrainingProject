@@ -1,20 +1,26 @@
-﻿<html>
+﻿@{ 
+    var ad = Session["ADMIN_SESSION"] as UI.Models.LoginModel;
+}
+<html> 
 <header class="header clearfix">
     <button type="button" id="toggleMenu" class="toggle_menu">
         <i class="fa fa-bars"></i>
     </button>
     <h1>
-        @*<img src="http://hocwebgiare.com/thiet_ke_web_chuan_demo/vertical-responsive-menu/img/logo_hocwebgiare.png" alt="" width="64" height="64" align="left">*@
-        MOJI
+        <img src="~/Content/Image/store_1580801513_542.png" alt="" width="80" height="40" align="left" style="margin-top:5px">
+        
     </h1>
-    <h2>ADMIN CONTROL PANEL</h2>
+    <h2>
+    <img src="~/Content/Image/cat.jpg" width="50px" style="border-radius:25px;" />
+    @ad.UserName
+    </h2>
     <script src="https://kit.fontawesome.com/c37e58ae3b.js" crossorigin="anonymous"></script>
 </header>
 <body>
     <nav class="vertical_nav" style="font-size:16px;">
         <ul id="js-menu" class="menu">
             <li class="menu--item">
-                <a href="@Url.Action("Index", "Membership")" class="menu--link">
+                <a href="@Url.Action("Index", "Membership")" class="menu--link" title="Quản lý loại thẻ">
                     <i class="menu--icon  fas fa-fw fa-address-card"></i><span class="menu--label">Quản lý loại thẻ</span>
                 </a>
             </li>
@@ -42,6 +48,16 @@
             <li class="menu--item">
                 <a href="#" class="menu--link" title="Quản lý tin tức">
                     <i class="menu--icon  fa fa-fw fa-briefcase"></i><span class="menu--label">Quản lý tin tức</span>
+                </a>
+            </li>
+            <li class="menu--item">
+                <a href="@Url.Action("Index","Category")" class="menu--link" title="Quản lý loại hàng">
+                    <i class="menu--icon  fa fa-fw fa-window-maximize"></i><span class="menu--label">Quản lý loại hàng</span>
+                </a>
+            </li>
+            <li class="menu--item">
+                <a href="@Url.Action("Index","Store")" class="menu--link" title="Quản lý cửa hàng">
+                    <i class="menu--icon  fa fa-fw fa-map-marker"></i><span class="menu--label">Quản lý cửa hàng</span>
                 </a>
             </li>
             <li class="menu--item">

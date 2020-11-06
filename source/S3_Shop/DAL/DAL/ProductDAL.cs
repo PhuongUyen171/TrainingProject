@@ -40,7 +40,7 @@ namespace DAL.DAL
                 if (itemUpdate != null)
                 {
                     itemUpdate.ProductName = product.ProductName;
-                    itemUpdate.CategoryID = product.CategoryID;
+                    itemUpdate.CateID = product.CateID;
                     itemUpdate.Images = product.Images;
                     itemUpdate.Price = product.Price;
                     itemUpdate.Quantity = product.Quantity;
@@ -77,7 +77,7 @@ namespace DAL.DAL
         }
         public List<PRODUCT> GetProductsByCategoryID(int id)
         {
-            return db.PRODUCTs.Where(t => t.CategoryID == id).Take(24).ToList();
+            return db.PRODUCTs.Where(t => t.CateID == id).Take(24).ToList();
         }
         public List<PRODUCT> GetNewProductsByCount(int count)
         {

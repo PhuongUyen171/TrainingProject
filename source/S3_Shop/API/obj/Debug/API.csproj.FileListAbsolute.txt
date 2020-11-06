@@ -1,3 +1,4 @@
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.csprojAssemblyReference.cache
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.csproj.CoreCompileInputs.cache
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\API.dll.config
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\API.dll
@@ -72,7 +73,6 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\System.Web.H
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\DAL.pdb
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\DAL.dll.config
-C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.csprojAssemblyReference.cache
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.csproj.CopyComplete
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.pdb

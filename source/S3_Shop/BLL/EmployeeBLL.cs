@@ -51,5 +51,33 @@ namespace BLL
             EmployeeModel result = mapObj.Translate(employ);
             return result;
         }
+        public EmployeeModel GetEmployeeByUsername(string user)
+        {
+            EntityMapper<EMPLOYEE, EmployeeModel> mapObj = new EntityMapper<EMPLOYEE, EmployeeModel>();
+            EMPLOYEE employ = employDal.GetEmployeeByUsername(user);
+            EmployeeModel result = mapObj.Translate(employ);
+            return result;
+        }
+        public int LoginEmployee(string user, string pass)
+        {
+            //0: tài khoản ko tồn tại
+            //-1: Tài khoản đang bị khóa
+            //-2: Mật khẩu không đúng
+            //1: Thành công
+            return employDal.GetLoginResultByUsernamePassword(user, pass);
+        }
+        public EmployeeModel GetEmployeeInforByUsernamePassword(string user, string pass)
+        {
+            EntityMapper<EMPLOYEE, EmployeeModel> mapObj = new EntityMapper<EMPLOYEE, EmployeeModel>();
+            EMPLOYEE employ = employDal.GetEmployeeInforByUsernamePassword(user, pass);
+            EmployeeModel result = mapObj.Translate(employ);
+            return result;
+        }
+        public bool UpdateStatusEmployee(Model.EmployeeModel employ)
+        {
+            EntityMapper<Model.EmployeeModel, EMPLOYEE> mapObj = new EntityMapper<Model.EmployeeModel, EMPLOYEE>();
+            EMPLOYEE employObj = mapObj.Translate(employ);
+            return employDal.ChangeStatus(employ.EmployID);
+        }
     }
 }

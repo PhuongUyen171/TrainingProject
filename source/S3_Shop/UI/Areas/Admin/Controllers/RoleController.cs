@@ -17,7 +17,6 @@ namespace UI.Areas.Admin.Controllers
             url = "https://localhost:44379/api/Role_API/";
             serviceObj = new ServiceRepository();
         }
-        // GET: Admin/Role
         public ActionResult Index()
         {
             try
@@ -32,20 +31,18 @@ namespace UI.Areas.Admin.Controllers
                 throw;
             }
         }
-        //[HttpGet]  
+        [HttpGet]  
         public ActionResult EditRole(int id)
         {
-            ServiceRepository serviceObj = new ServiceRepository();
             HttpResponseMessage response = serviceObj.GetResponse(url+"GetDetailRole/" + id);
             response.EnsureSuccessStatusCode();
             Model.RoleModel role  = response.Content.ReadAsAsync<Model.RoleModel>().Result;
             return View(role);
         }
-        //[HttpPost]  
+        [HttpPost]
         public ActionResult UpdateRole(Model.RoleModel role)
         {
-            ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.PutResponse("api/Role/UpdateRole/",role);
+            HttpResponseMessage response = serviceObj.PutResponse(url+"UpdateRole/",role);
             response.EnsureSuccessStatusCode();
             return RedirectToAction("GetAllRoles");
         }
