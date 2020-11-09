@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using Model;
 
 namespace UI.Areas.Admin.Controllers
 {
@@ -23,7 +24,7 @@ namespace UI.Areas.Admin.Controllers
             {
                 HttpResponseMessage response = serviceObj.GetResponse(url + "GetAllRoles");
                 response.EnsureSuccessStatusCode();
-                List<Model.RoleModel> list = response.Content.ReadAsAsync<List<Model.RoleModel>>().Result;
+                List<RoleModel> list = response.Content.ReadAsAsync<List<RoleModel>>().Result;
                 return View(list);
             }
             catch (Exception)
@@ -31,27 +32,27 @@ namespace UI.Areas.Admin.Controllers
                 throw;
             }
         }
-        [HttpGet]  
+        [HttpGet]
         public ActionResult EditRole(int id)
         {
-            HttpResponseMessage response = serviceObj.GetResponse(url+"GetDetailRole/" + id);
+            HttpResponseMessage response = serviceObj.GetResponse(url + "GetDetailRole/" + id);
             response.EnsureSuccessStatusCode();
-            Model.RoleModel role  = response.Content.ReadAsAsync<Model.RoleModel>().Result;
+            RoleModel role = response.Content.ReadAsAsync<RoleModel>().Result;
             return View(role);
         }
         [HttpPost]
-        public ActionResult UpdateRole(Model.RoleModel role)
+        //Không tác động thêm xóa sỬA
+        public ActionResult UpdateRole(RoleModel role)
         {
-            HttpResponseMessage response = serviceObj.PutResponse(url+"UpdateRole/",role);
+            HttpResponseMessage response = serviceObj.PutResponse(url + "UpdateRole/", role);
             response.EnsureSuccessStatusCode();
-            return RedirectToAction("GetAllRoles");
+            return RedirectToAction("Index");
         }
         public ActionResult DetailRole(int id)
         {
-            ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.GetResponse(url+"GetDetailRole/" + id);
+            HttpResponseMessage response = serviceObj.GetResponse(url + "GetDetailRole/" + id);
             response.EnsureSuccessStatusCode();
-            Model.RoleModel role = response.Content.ReadAsAsync<Model.RoleModel>().Result;
+            RoleModel role = response.Content.ReadAsAsync<RoleModel>().Result;
             return View(role);
         }
         [HttpGet]
@@ -60,19 +61,17 @@ namespace UI.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateRole(Model.RoleModel role)
+        public ActionResult CreateRole(RoleModel role)
         {
-            ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.PostResponse(url+"api/Role/InsertRole/", role);
+            HttpResponseMessage response = serviceObj.PostResponse(url + "InsertRole/", role);
             response.EnsureSuccessStatusCode();
-            return RedirectToAction("GetAllRoles");
+            return RedirectToAction("Index");
         }
-        public ActionResult Delete(int id)
+        public ActionResult DeleteRole(int id)
         {
-            ServiceRepository serviceObj = new ServiceRepository();
-            HttpResponseMessage response = serviceObj.DeleteResponse(url+"DeleteRole/" + id);
+            HttpResponseMessage response = serviceObj.DeleteResponse(url + "DeleteRole/" + id);
             response.EnsureSuccessStatusCode();
-            return RedirectToAction("GetAllProducts");
+            return RedirectToAction("Index");
         }
     }
 }

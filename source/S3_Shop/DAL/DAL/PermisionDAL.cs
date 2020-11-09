@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 using DAL.EF;
 namespace DAL.DAL
 {
-    public static class PermisionDAL
+    public class PermisionDAL
     {
-        static S3ShopDbContext db;
-        static PermisionDAL()
+        private S3ShopDbContext db;
+        public PermisionDAL()
         {
             db = new S3ShopDbContext();
             db.Configuration.ProxyCreationEnabled = false;
         }
         #region CRUD
-        public static bool InsertPermision(PERMISION per)
+        public List<PERMISION> GetAllPermisions()
+        {
+            return db.PERMISIONs.ToList();
+        }
+        public bool InsertPermision(PERMISION per)
         {
             try
             {
@@ -28,7 +32,7 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public static bool UpdatePermision(PERMISION per)
+        public bool UpdatePermision(PERMISION per)
         {
             try
             {
@@ -45,8 +49,25 @@ namespace DAL.DAL
                 return false;
             }
         }
+        public bool DeletePermision(string groupID, int roleID)
+        {
+            try
+            {
+                var itemDelete = GetPermisionByID(groupID,roleID);
+                if (itemDelete != null)
+                {
+                    db.PERMISIONs.Remove(itemDelete);
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         #endregion
-        public static PERMISION GetPermisionByID(string groupId, int roleID)
+        public PERMISION GetPermisionByID(string groupId, int roleID)
         {
             return db.PERMISIONs.FirstOrDefault(t => t.GroupID == groupId & t.RoleID == roleID);
         }

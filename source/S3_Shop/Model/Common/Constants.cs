@@ -13,6 +13,7 @@ namespace Model.Common
         public static string MOD_GROUP = "MOD";
         public static string USER_SESSION = "USER_SESSION";
         public static string ADMIN_SESSION = "ADMIN_SESSION";
+        public static string SESSION_CREDENTIALS = "SESSION_CREDENTIALS";
         public static int COUNT_LOGIN_FAIL_ADMIN = 0;
         public static int COUNT_LOGIN_FAIL_USER = 0;
     }

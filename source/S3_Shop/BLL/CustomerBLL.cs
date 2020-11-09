@@ -13,7 +13,7 @@ namespace BLL
     public class CustomerBLL
     {
         CustomerDAL customDal = new CustomerDAL();
-        public List<Model.CustomerModel> GetAllCustomers()
+        public List<CustomerModel> GetAllCustomers()
         {
             EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel> mapObj = new EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel>();
             List<DAL.EF.CUSTOMER> customList = new CustomerDAL().GetAllCustomers();
@@ -29,13 +29,13 @@ namespace BLL
             bool customer = new CustomerDAL().ChechCustomerExist(user, pass);
             return customer;
         }
-        public bool InsertCustomer(Model.CustomerModel cusInsert)
+        public bool InsertCustomer(CustomerModel cusInsert)
         {
             EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel,CUSTOMER>();
             CUSTOMER customObj  = mapObj.Translate(cusInsert);
             return customDal.InsertCustomer(customObj);
         }
-        public bool UpdateCustomer(Model.CustomerModel cusUpdate)
+        public bool UpdateCustomer(CustomerModel cusUpdate)
         {
             EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel, CUSTOMER>();
             CUSTOMER customObj = mapObj.Translate(cusUpdate);

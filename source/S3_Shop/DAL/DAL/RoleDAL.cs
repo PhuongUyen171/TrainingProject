@@ -73,6 +73,7 @@ namespace DAL.DAL
         {
             return db.ROLES.Where(t => t.RoleID == id).FirstOrDefault();
         }
+        
     }
 }
 

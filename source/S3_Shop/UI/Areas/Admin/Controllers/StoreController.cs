@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using Model.Common;
 
 namespace UI.Areas.Admin.Controllers
 {
@@ -18,6 +19,7 @@ namespace UI.Areas.Admin.Controllers
             serviceObj = new ServiceRepository();
         }
         // GET: Admin/Role
+        [HasPermision(RoleID = "2")]
         public ActionResult Index()
         {
             try

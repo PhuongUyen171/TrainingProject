@@ -15,7 +15,7 @@ namespace API.Areas.Admin.Controllers
         private EmployeeBLL empBLL = new EmployeeBLL();
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpGet]
-        public List<Model.EmployeeModel> GetAllEmployees()
+        public List<EmployeeModel> GetAllEmployees()
         {
             return empBLL.GetAllEmployees();
         }
@@ -23,11 +23,11 @@ namespace API.Areas.Admin.Controllers
         {
             return empBLL.LoginEmployee(user, pass);
         }
-        public Model.EmployeeModel GetEmployeeByUsername(string user)
+        public EmployeeModel GetEmployeeByUsername(string user)
         {
             return empBLL.GetEmployeeByUsername(user);
         }
-        public Model.EmployeeModel GetEmployeeInforByUsernamePassword(string user, string pass)
+        public EmployeeModel GetEmployeeInforByUsernamePassword(string user, string pass)
         {
             return empBLL.GetEmployeeInforByUsernamePassword(user, pass);
         }
@@ -36,5 +36,14 @@ namespace API.Areas.Admin.Controllers
         {
             return empBLL.UpdateStatusEmployee(user);
         }
+        public EmployeeModel GetEmployeeByID(int id)
+        {
+            return empBLL.GetEmployeeByID(id);
+        }
+        public List<int> GetPermisionByUsername(string name)
+        {
+            return empBLL.GetPermisionByUsername(name);
+        }
+       
     }
 }

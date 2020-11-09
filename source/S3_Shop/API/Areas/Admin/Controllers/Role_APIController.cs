@@ -12,16 +12,16 @@ namespace API.Areas.Admin.Controllers
 {
     public class Role_APIController : ApiController
     {
-        RoleBLL roleBll = new RoleBLL();
+        private RoleBLL roleBll = new RoleBLL();
         [EnableCors(origins: "*", headers: "*", methods: "*")]
         [HttpGet]
-        public List<Model.RoleModel> GetAllRoles()
+        public List<RoleModel> GetAllRoles()
         {
-            return new RoleBLL().GetAllRoles();
+            return roleBll.GetAllRoles();
         }
         public bool InsertRole(RoleModel role)
         {
-            return new RoleBLL().InsertRole(role);
+            return roleBll.InsertRole(role);
         }
         public bool DeleteRole(int id)
         {
@@ -29,12 +29,11 @@ namespace API.Areas.Admin.Controllers
         }
         public bool UpdateRole(RoleModel role)
         {
-            return new RoleBLL().UpdateRole(role);
+            return roleBll.UpdateRole(role);
         }
-
         public RoleModel GetDetailRole(int id)
         {
-            return new RoleBLL().GetRoleByID(id);
+            return roleBll.GetRoleByID(id);
         }
     }
 }

@@ -1,4 +1,3 @@
-C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.csprojAssemblyReference.cache
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.csproj.CoreCompileInputs.cache
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\API.dll.config
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\API.dll
@@ -76,3 +75,4 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\bin\DAL.dll.conf
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.csproj.CopyComplete
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\API\obj\Debug\API.csprojAssemblyReference.cache

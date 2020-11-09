@@ -120,6 +120,24 @@ namespace DAL.DAL
             var employ = db.EMPLOYEEs.FirstOrDefault(x => x.EmployName == user);
             return employ;
         }
-       
+        public List<int> GetListPermisionByUsername(string username)
+        {
+            var user = db.EMPLOYEEs.SingleOrDefault(x => x.EmployName == username);
+            var roles = (from a in db.PERMISIONs
+                         join b in db.EMPLOYEEs on a.GroupID equals b.GroupID
+                         join c in db.ROLES on a.RoleID equals c.RoleID
+                         where b.GroupID == user.GroupID
+                         select new
+                         {
+                             RoleID = a.RoleID,
+                             GroupID = a.GroupID
+                         }).AsEnumerable().Select(x => new PERMISION()
+                         {
+                             RoleID = x.RoleID,
+                             GroupID = x.GroupID
+                         });
+            return roles.Select(x => x.RoleID).ToList();
+        }
+
     }
 }

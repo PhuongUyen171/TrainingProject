@@ -22,14 +22,53 @@ namespace UI.Areas.Admin.Controllers
         }
         public ActionResult Index(string user, string pass)
         {
-            HttpResponseMessage response = serviceObj.GetResponse(url + "GetEmployeeInforByUsernamePassword/?user=" + user + "&pass=" + pass);
-            response.EnsureSuccessStatusCode();
-            Model.EmployeeModel resultLogin = response.Content.ReadAsAsync<Model.EmployeeModel>().Result;
-            return View(resultLogin);
+            try
+            {
+                HttpResponseMessage response = serviceObj.GetResponse(url + "GetEmployeeInforByUsernamePassword/?user=" + user + "&pass=" + pass);
+                response.EnsureSuccessStatusCode();
+                Model.EmployeeModel resultLogin = response.Content.ReadAsAsync<Model.EmployeeModel>().Result;
+                return View(resultLogin);
+            }
+            catch (Exception)
+            {
+                return View("Login");
+            }
+            
+        }
+        public ActionResult Logout()
+        {
+            try
+            {
+                Session.Remove("ADMIN_SESSION");
+                if (Response.Cookies["username"] != null)
+                {
+                    HttpCookie ckUser = new HttpCookie("username");
+                    ckUser.Expires = DateTime.Now.AddHours(-48);
+                    Response.Cookies.Add(ckUser);
+                }
+                if (Response.Cookies["password"] != null)
+                {
+                    HttpCookie ckPass = new HttpCookie("password");
+                    ckPass.Expires = DateTime.Now.AddHours(-48);
+                    Response.Cookies.Add(ckPass);
+                }
+                return View("Login");
+            }
+            catch (Exception)
+            {
+                return View("Login"); 
+            }
         }
         public ActionResult Login()
         {
-            return View();
+            LoginModel model = CheckAccount();
+            if (model == null)
+                return View();
+            else
+            {
+                Session["ADMIN_SESSION"] = model;
+                return RedirectToAction("Index","Login",new { user=model.UserName,pass=model.Password});
+            }
         }
 
         [HttpPost]
@@ -39,54 +78,111 @@ namespace UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                HttpResponseMessage response = serviceObj.GetResponse(url + "GetEmployeeByUsernamePassword/?user="+model.UserName+"&pass="+model.Password);
+                HttpResponseMessage response = serviceObj.GetResponse(url + "GetEmployeeByUsernamePassword/?user=" + model.UserName + "&pass=" + model.Password);
                 response.EnsureSuccessStatusCode();
-                int resultLogin= response.Content.ReadAsAsync<int>().Result;
-                if (resultLogin == 1)
+                int resultLogin = response.Content.ReadAsAsync<int>().Result;
+                switch (resultLogin)
                 {
-                    HttpResponseMessage responseUser = serviceObj.GetResponse(url + "GetEmployeeByUsername?user=" + model.UserName);
-                    responseUser.EnsureSuccessStatusCode();
-                    Model.EmployeeModel employLogin = responseUser.Content.ReadAsAsync<Model.EmployeeModel>().Result;
-   
-                    var adSession = new LoginModel();
-                    adSession.UserName = employLogin.EmployName;
-                    adSession.Password = employLogin.Pass;
+                    case 1:
+                        {
+                            HttpResponseMessage responseUser = serviceObj.GetResponse(url + "GetEmployeeByUsername?user=" + model.UserName);
+                            responseUser.EnsureSuccessStatusCode();
+                            Model.EmployeeModel employLogin = responseUser.Content.ReadAsAsync<Model.EmployeeModel>().Result;
 
-                    //Chưa xử lý remember me
-                    //userSession.RememberMe = user.RememberMe;
-                    //var listCredentials = dao.GetListCredential(model.UserName);
-                    //Session.Add(Constants.SESSION_CREDENTIALS, listCredentials);
+                            var adSession = new LoginModel();
+                            adSession.UserName = employLogin.EmployName;
+                            adSession.Password = employLogin.Pass;
+                            adSession.GroupID = employLogin.GroupID;
 
-                    Session.Add(Constants.ADMIN_SESSION, adSession);
-                    Constants.COUNT_LOGIN_FAIL_ADMIN = 0;
-                    return RedirectToAction("Index", "Login", new { user = adSession.UserName, pass = adSession.Password });
+                            //Lấy list danh sách phân quyền
+                            HttpResponseMessage responsePermision = serviceObj.GetResponse(url + "GetPermisionByUsername?name=" + model.UserName);
+                            responsePermision.EnsureSuccessStatusCode();
+                            List<int> listPermision = responsePermision.Content.ReadAsAsync<List<int>>().Result;
+                            Session.Add(Constants.SESSION_CREDENTIALS, listPermision);
+
+                            //Xử lý remember me
+                            Session.Add(Constants.ADMIN_SESSION, adSession);
+                            if (model.RememberMe)
+                            {
+                                HttpCookie ckUser = new HttpCookie("username");
+                                ckUser.Expires = DateTime.Now.AddHours(48);
+                                ckUser.Value = model.UserName;
+                                Response.Cookies.Add(ckUser);
+                                HttpCookie ckPass = new HttpCookie("password");
+                                ckPass.Expires = DateTime.Now.AddHours(48);
+                                ckPass.Value = model.Password;
+                                Response.Cookies.Add(ckPass);
+                            }
+                            Constants.COUNT_LOGIN_FAIL_ADMIN = 0;
+                            return RedirectToAction("Index", "Login", new { user = adSession.UserName, pass = adSession.Password });
+                        }
+                    case 0:
+                        ModelState.AddModelError("", "Tài khoản không tồn tại.");
+                        break;
+                    case -1:
+                        ModelState.AddModelError("", "Tài khoản đang bị khoá.");
+                        break;
+                    case -2:
+                        if (Constants.COUNT_LOGIN_FAIL_ADMIN == 3)
+                        {
+                            HttpResponseMessage responseUser = serviceObj.GetResponse(url + "GetEmployeeByUsername?user=" + model.UserName);
+                            responseUser.EnsureSuccessStatusCode();
+                            /*[HttpPost]
+        //Không tác động thêm xóa sỬA
+        public ActionResult UpdateRole(RoleModel role)
+        {
+            HttpResponseMessage response = serviceObj.PutResponse(url + "UpdateRole/", role);
+            response.EnsureSuccessStatusCode();
+            return RedirectToAction("Index");
+        }*/
+                            EmployeeModel employLogin = responseUser.Content.ReadAsAsync<EmployeeModel>().Result;
+                            //Chưa gọn: rảnh xử lý cho gọn
+                            if(UpdateStatusEmployee(employLogin))
+                                ModelState.AddModelError("", "Đăng nhập sai quá 3 lần. Tài khoản bạn đã bị khóa.");
+                            else
+                                ModelState.AddModelError("", "Đăng nhập sai quá 3 lần. Tài khoản không khóa được");
+                        }
+                        else
+                        {
+                            Constants.COUNT_LOGIN_FAIL_ADMIN++;
+                            ModelState.AddModelError("", "Mật khẩu không đúng.");
+                        }
+                        break;
+                    default:
+                        ModelState.AddModelError("", "Đăng nhập thất bại.");
+                        break;
                 }
-                else if(resultLogin==0)
-                    ModelState.AddModelError("", "Tài khoản không tồn tại.");
-                else if(resultLogin==-1)
-                    ModelState.AddModelError("", "Tài khoản đang bị khoá.");
-                else if (resultLogin == -2)
-                {
-                    if(Constants.COUNT_LOGIN_FAIL_ADMIN==3)
-                    {
-                        HttpResponseMessage responseUser = serviceObj.GetResponse(url + "GetEmployeeByUsername?user=" + model.UserName);
-                        responseUser.EnsureSuccessStatusCode();
-                        Model.EmployeeModel employLogin = responseUser.Content.ReadAsAsync<Model.EmployeeModel>().Result;
-                        //Chưa gọn: rảnh xử lý cho gọn
-                        HttpResponseMessage responseBlock = serviceObj.PutResponse(url + "UpdateStatusEmployee/", employLogin);
-                        responseBlock.EnsureSuccessStatusCode();
-                        ModelState.AddModelError("", "Đăng nhập sai quá 3 lần. Tài khoản bạn đã bị khóa.");
-                    }
-                    else
-                    {
-                        Constants.COUNT_LOGIN_FAIL_ADMIN++;
-                        ModelState.AddModelError("", "Mật khẩu không đúng.");
-                    }
-                }
-                else
-                    ModelState.AddModelError("", "Đăng nhập thất bại.");
-            }   
+            }
             return this.View();
+        }
+        [HttpPost]
+        public bool UpdateStatusEmployee(EmployeeModel employLogin)
+        {
+            try
+            {
+                HttpResponseMessage responseBlock = serviceObj.PutResponse(url + "UpdateStatusEmployee/", employLogin);
+                responseBlock.EnsureSuccessStatusCode();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+        }
+        public LoginModel CheckAccount()
+        {
+            LoginModel result=null;
+            string username = string.Empty;
+            string password = string.Empty;
+            if (Request.Cookies["username"] != null)
+                username = Request.Cookies["username"].Value;
+            if (Request.Cookies["password"] != null)
+                password = Request.Cookies["password"].Value;
+            if (!string.IsNullOrEmpty(username) & !string.IsNullOrEmpty(password))
+                result = new LoginModel { UserName = username, Password = password};
+            return result;
+        }
             //{
             //    var dao = new customerdaL();
             //    var result = dao.Login(model.UserName, Encryptor.MD5Hash(model.Password), true);
@@ -125,6 +221,6 @@ namespace UI.Areas.Admin.Controllers
             //    }
             //}
             //return View("Index");
-        }
+        
     }
 }

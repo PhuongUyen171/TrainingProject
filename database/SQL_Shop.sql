@@ -250,6 +250,30 @@ INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SALE',4,1)
 INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SALE',10,1)
 INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SALE',12,1)
 
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',1,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',2,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',3,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',4,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',9,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',8,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',7,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',6,0)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',10,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('MANA',12,1)
+
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',1,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',2,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',3,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',4,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',5,0)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',9,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',8,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',7,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',6,0)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',10,1)
+INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',12,1)
+
+
 -- EMPLOYEE
 INSERT INTO EMPLOYEE(EmployName,FirstName,LastName,Pass,Statu,GroupID) VALUES
 ('hai.bui',N'Hải',N'Bùi','123',1,'SALE'),
@@ -265,6 +289,8 @@ INSERT INTO VOUCHER(VoucherID,Title,Images,Sale,EndDate) VALUES
 -- CUSTOMER
 INSERT INTO CUSTOMER(CustomName,Phone,Email,Location,Pass,Statu,TotalPrice) VALUES
 (N'Nguyễn Xuân Nghi','0917320031','xuannghi@gmail.com',N'307 Nguyễn Văn Trỗi','123',1,0)
+
+
 
 -- COUNTRY
 INSERT [dbo].[Country] ([Id], [CountryCode], [CommonName], [FormalName], [CountryType], [CountrySubType], [Sovereignty], [Capital], [CurrencyCode], [CurrencyName], [TelephoneCode], [CountryCode3], [CountryNumber], [InternetCountryCode], [SortOrder], [IsPublished], [Flags], [IsDeleted]) VALUES (237, N'VN', N'Việt Nam', N'Socialist Republic of Vietnam', N'Independent State', NULL, NULL, N'Hanoi', N'VND', N'Dong', N'84', N'VNM', N'704', N'.vn', 1, 1, N'vn.png', 0)

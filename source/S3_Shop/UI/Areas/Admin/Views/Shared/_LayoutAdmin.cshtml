@@ -7,8 +7,7 @@
         <i class="fa fa-bars"></i>
     </button>
     <h1>
-        <img src="~/Content/Image/store_1580801513_542.png" alt="" width="80" height="40" align="left" style="margin-top:5px">
-        
+        <a src="@Url.Action("Index","Login","")"><img src="~/Content/Image/store_1580801513_542.png" alt="" width="80" height="40" align="left" style="margin-top:5px"></a>
     </h1>
     <h2>
     <img src="~/Content/Image/cat.jpg" width="50px" style="border-radius:25px;" />
@@ -25,8 +24,23 @@
                 </a>
             </li>
             <li class="menu--item">
+                <a href="@Url.Action("Index", "GroupAdmin")" class="menu--link" title="Quản lý nhóm admin">
+                    <i class="menu--icon  fas fa-fw fa-users"></i><span class="menu--label">Quản lý nhóm admin</span>
+                </a>
+            </li>
+            <li class="menu--item">
+                <a href="@Url.Action("Index", "Product")" class="menu--link" title="Quản lý sản phẩm">
+                    <i class="menu--icon  fas fa-fw fa-gift"></i><span class="menu--label">Quản lý sản phẩm</span>
+                </a>
+            </li>
+            <li class="menu--item">
                 <a href="@Url.Action("Index", "Role")" class="menu--link">
                     <i class="menu--icon  fas fa-fw fa-table"></i><span class="menu--label">Quản lý bảng</span>
+                </a>
+            </li>
+            <li class="menu--item">
+                <a href="@Url.Action("Index", "Permision")" class="menu--link">
+                    <i class="menu--icon  fas fa-fw fa-user-times"></i><span class="menu--label">Quản lý phân quyền</span>
                 </a>
             </li>
             <li class="menu--item  menu--item__has_sub_menu">
@@ -61,6 +75,11 @@
                 </a>
             </li>
             <li class="menu--item">
+                <a href="@Url.Action("Index","Permision")" class="menu--link" title="Quản lý phân quyền">
+                    <i class="menu--icon  fa fa-fw fa-map-marker"></i><span class="menu--label">Quản lý phân quyền</span>
+                </a>
+            </li>
+            <li class="menu--item">
                 <a href="#" class="menu--link" title="Item 3">
                     <i class="menu--icon  fa fa-fw fa-cog"></i><span class="menu--label">Quản lý đơn hàng</span>
                 </a>
@@ -82,7 +101,7 @@
                 </ul>
             </li>
             <li class="menu--item">
-                <a href="#" class="menu--link" title="Item 5">
+                <a href="@Url.Action("Logout","Login")" class="menu--link" title="Item 5">
                     <i class="menu--icon  fa fa-fw fa-lock"></i> <span class="menu--label">Thoát ra</span>
                 </a>
             </li>
@@ -94,9 +113,7 @@
     <div class="wrapper">
         @RenderBody()
     </div>
-    
 </body>
-
 </html>
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />

@@ -19,7 +19,7 @@ namespace UI.Models
         public string Password { set; get; }
 
         public bool RememberMe { set; get; }
-
+        public string GroupID { set; get; }
         public LoginModel() { }
     }
 }

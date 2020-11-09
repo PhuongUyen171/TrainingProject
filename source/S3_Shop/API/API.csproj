@@ -158,8 +158,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\Customer_APIController.cs" />
     <Compile Include="Areas\Admin\Controllers\Employee_APIController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GroupAdmin_APIController.cs" />
     <Compile Include="Areas\Admin\Controllers\Membership_APIController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Permision_APIController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductAdmin_APIController.cs" />
     <Compile Include="Areas\Admin\Controllers\Role_APIController.cs" />
     <Compile Include="Controllers\Category_APIController.cs" />
     <Compile Include="Controllers\News_APIController.cs" />

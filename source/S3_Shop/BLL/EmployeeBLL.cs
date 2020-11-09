@@ -24,6 +24,11 @@ namespace BLL
             }
             return employees;
         }
+        public List<int> GetPermisionByUsername(string name)
+        {
+            List<int> result = employDal.GetListPermisionByUsername(name);
+            return result;
+        }
         public bool CheckEmployeeExist(string user, string pass)
         {
             return employDal.CheckEmployeeExist(user, pass);
