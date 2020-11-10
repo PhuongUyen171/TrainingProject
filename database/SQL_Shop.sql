@@ -7,7 +7,7 @@ GO
 CREATE TABLE CATEGORY
 (
 	CateID INT IDENTITY PRIMARY KEY,
-	CateName NVARCHAR(50),
+	CateName NVARCHAR(50) NOT NULL,
 	Images VARCHAR(50)
 )
 CREATE TABLE STORE
@@ -21,7 +21,7 @@ CREATE TABLE STORE
 CREATE TABLE MEMBERSHIP
 (
 	MemID CHAR(10) PRIMARY KEY,
-	MemName NVARCHAR(50),
+	MemName NVARCHAR(50) NOT NULL,
 	MinPrice INT,
 	MaxPrice INT,
 	Sale INT DEFAULT 0
@@ -29,13 +29,13 @@ CREATE TABLE MEMBERSHIP
 CREATE TABLE CUSTOMER
 (
 	CustomID INT IDENTITY PRIMARY KEY,
-	Username VARCHAR(500),
+	Username VARCHAR(500) NOT NULL,
 	CustomName NVARCHAR(100),
 	Phone CHAR(10),
 	Email VARCHAR(100),
 	Location NVARCHAR(MAX),
 	Pass VARCHAR(MAX),
-	Statu BIT DEFAULT 1,--1 là đang hoạt động, 0 là bị chặn
+	Statu BIT DEFAULT 1 NOT NULL,--1 là đang hoạt động, 0 là bị chặn
 	TotalPrice INT DEFAULT 0,
 	MemID CHAR(10) FOREIGN KEY (MemID) REFERENCES MEMBERSHIP(MemID)
 )
@@ -74,7 +74,7 @@ CREATE TABLE EMPLOYEE
 	FirstName NVARCHAR(50),
 	LastName NVARCHAR(50),
 	Pass VARCHAR(MAX),
-	Statu BIT DEFAULT 1,--1 đang làm việc, 0 đã nghỉ việc
+	Statu BIT DEFAULT 1 NOT NULL,--1 đang làm việc, 0 đã nghỉ việc
 	GroupID CHAR(10) FOREIGN KEY (GroupID) REFERENCES GROUPADMIN(GroupID)
 )
 CREATE TABLE NEWS
@@ -274,11 +274,11 @@ INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',10,1)
 INSERT INTO PERMISION (GroupID, RoleID,PerID) VALUES('SRTR',12,1)
 
 
--- EMPLOYEE
+-- EMPLOYEE -- pass 123
 INSERT INTO EMPLOYEE(EmployName,FirstName,LastName,Pass,Statu,GroupID) VALUES
-('hai.bui',N'Hải',N'Bùi','123',1,'SALE'),
-('uyen.nguyen',N'Uyên',N'Nguyễn','123',1,'MANA'),
-('toan.le',N'Toàn',N'Lê','123',1,'SRTR')
+('hai.bui',N'Hải',N'Bùi','202cb962ac59075b964b07152d234b70',1,'SALE'),
+('uyen.nguyen',N'Uyên',N'Nguyễn','202cb962ac59075b964b07152d234b70',1,'MANA'),
+('toan.le',N'Toàn',N'Lê','202cb962ac59075b964b07152d234b70',1,'SRTR')
 
 -- VOUCHER
 SET DATEFORMAT DMY
@@ -287,9 +287,10 @@ INSERT INTO VOUCHER(VoucherID,Title,Images,Sale,EndDate) VALUES
 ('WOMAN0803',N'Chào mừng ngày 08-03','',3,'08-03-2021')
 
 -- CUSTOMER
-INSERT INTO CUSTOMER(CustomName,Phone,Email,Location,Pass,Statu,TotalPrice) VALUES
-(N'Nguyễn Xuân Nghi','0917320031','xuannghi@gmail.com',N'307 Nguyễn Văn Trỗi','123',1,0)
-
+INSERT INTO CUSTOMER(CustomName,UserName,Phone,Email,Location,Pass,Statu,TotalPrice) VALUES
+(N'Nguyễn Xuân Nghi','xuannghi','0917320031','xuannghi@gmail.com',N'307 Nguyễn Văn Trỗi','202cb962ac59075b964b07152d234b70',1,0)
+INSERT INTO CUSTOMER(CustomName,UserName,Phone,Email,Location,Pass,Statu,TotalPrice) VALUES
+(N'Nguyễn Xuân Nhật','xuannhat','0917320123','xuannhat@gmail.com',N'307 Nguyễn Trãi','202cb962ac59075b964b07152d234b70',1,0)
 
 
 -- COUNTRY
@@ -12349,6 +12350,6 @@ SELECT * FROM DISTRICT
 SELECT * FROM PROVINCE
 SELECT * FROM WARD
 SELECT * FROM COUNTRY
-update EMPLOYEE 
-set pass='ba1f2511fc30423bdbb183fe33f3dd0f'
-where EmployID=1
+update Customer
+set pass='202cb962ac59075b964b07152d234b70'
+where CustomID=2

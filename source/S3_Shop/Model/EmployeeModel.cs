@@ -14,7 +14,7 @@ namespace Model
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Pass { get; set; }
-        public Nullable<bool> Statu { get; set; }
+        public bool Statu { get; set; }
         public string GroupID { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.EF;
+using DAL.Common;
 
 namespace DAL.DAL
 {
@@ -79,15 +80,15 @@ namespace DAL.DAL
         {
             return db.CUSTOMERs.Where(t => t.CustomID == id).FirstOrDefault();
         }
-        public bool ChechCustomerExist(string username, string password)
-        {
-            return db.CUSTOMERs.Any(t => t.CustomName == username & t.Pass == password);
-        }
-        public bool ChangeStatusCustomer(string username)
+        //public bool ChechCustomerExist(string username, string password)
+        //{
+        //    return db.CUSTOMERs.Any(t => t.CustomName == username & t.Pass == Encryptor.MD5Hash(password));
+        //}
+        public bool ChangeStatusCustomer(int userID)
         {
             try
             {
-                var acc = db.CUSTOMERs.SingleOrDefault(x => x.CustomName==username);
+                var acc = db.CUSTOMERs.SingleOrDefault(x => x.CustomID==userID);
                 acc.Statu = !acc.Statu;
                 db.SaveChanges();
                 return true;
@@ -107,6 +108,37 @@ namespace DAL.DAL
             {
                 return false;
             }
+        }
+        public int GetLoginResultByUsernamePassword(string user, string pass)
+        {
+            //0: Tên đăng nhập hoặc mật khẩu không tồn tại
+            //1: Thành công
+            var cus = db.CUSTOMERs.FirstOrDefault(x => x.Username == user);
+            if (cus == null)
+                return 0;
+            else if (cus.Pass != Encryptor.MD5Hash(pass))
+                return 0;
+            //else if (employ.Statu == false)
+            //    return -1;
+            //else if (employ.Pass != Encryptor.MD5Hash(pass))
+            //{
+            //    if (Model.Common.Constants.COUNT_LOGIN_FAIL_ADMIN == 3)
+            //    {
+            //        ChangeStatusEmployee(employ.EmployID);
+            //        return -3;
+            //    }
+            //    else
+            //    {
+            //        Model.Common.Constants.COUNT_LOGIN_FAIL_ADMIN++;
+            //        return -2;
+            //    }
+            //}
+            else
+                return 1;
+        }
+        public CUSTOMER GetCustomerByUsername(string user)
+        {
+            return db.CUSTOMERs.SingleOrDefault(t => t.Username == user);
         }
     }
 }

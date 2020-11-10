@@ -27,7 +27,7 @@ namespace DAL.EF
         public string Email { get; set; }
         public string Location { get; set; }
         public string Pass { get; set; }
-        public Nullable<bool> Statu { get; set; }
+        public bool Statu { get; set; }
         public Nullable<int> TotalPrice { get; set; }
         public string MemID { get; set; }
     

@@ -24,11 +24,11 @@ namespace BLL
             }
             return (List<Model.CustomerModel>)customers;
         }
-        public bool CheckCustomerExist(string user, string pass)
-        {
-            bool customer = new CustomerDAL().ChechCustomerExist(user, pass);
-            return customer;
-        }
+        //public bool CheckCustomerExist(string user, string pass)
+        //{
+        //    bool customer = new CustomerDAL().ChechCustomerExist(user, pass);
+        //    return customer;
+        //}
         public bool InsertCustomer(CustomerModel cusInsert)
         {
             EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel,CUSTOMER>();
@@ -51,6 +51,21 @@ namespace BLL
             CUSTOMER cus = new CustomerDAL().GetCustomerByID(id);
             CustomerModel result = mapObj.Translate(cus);
             return result;
+        }
+        public CustomerModel GetCustomerByUsername(string user)
+        {
+            EntityMapper<CUSTOMER, CustomerModel> mapObj = new EntityMapper<CUSTOMER, CustomerModel>();
+            CUSTOMER custom = customDal.GetCustomerByUsername(user);
+            CustomerModel result = mapObj.Translate(custom);
+            return result;
+        }
+        public int LoginCustomer(string user, string pass)
+        {
+            //0: tài khoản ko tồn tại
+            //-1: Tài khoản đang bị khóa
+            //-2: Mật khẩu không đúng
+            //1: Thành công
+            return customDal.GetLoginResultByUsernamePassword(user, pass);
         }
     }
 }

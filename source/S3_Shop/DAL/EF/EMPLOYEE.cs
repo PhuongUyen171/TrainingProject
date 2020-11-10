@@ -25,7 +25,7 @@ namespace DAL.EF
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Pass { get; set; }
-        public Nullable<bool> Statu { get; set; }
+        public bool Statu { get; set; }
         public string GroupID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

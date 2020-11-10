@@ -71,18 +71,18 @@ namespace BLL
             //1: Thành công
             return employDal.GetLoginResultByUsernamePassword(user, pass);
         }
-        public EmployeeModel GetEmployeeInforByUsernamePassword(string user, string pass)
-        {
-            EntityMapper<EMPLOYEE, EmployeeModel> mapObj = new EntityMapper<EMPLOYEE, EmployeeModel>();
-            EMPLOYEE employ = employDal.GetEmployeeInforByUsernamePassword(user, pass);
-            EmployeeModel result = mapObj.Translate(employ);
-            return result;
-        }
-        public bool UpdateStatusEmployee(Model.EmployeeModel employ)
-        {
-            EntityMapper<Model.EmployeeModel, EMPLOYEE> mapObj = new EntityMapper<Model.EmployeeModel, EMPLOYEE>();
-            EMPLOYEE employObj = mapObj.Translate(employ);
-            return employDal.ChangeStatus(employ.EmployID);
-        }
+        //public EmployeeModel GetEmployeeInforByUsernamePassword(string user, string pass)
+        //{
+        //    EntityMapper<EMPLOYEE, EmployeeModel> mapObj = new EntityMapper<EMPLOYEE, EmployeeModel>();
+        //    EMPLOYEE employ = employDal.GetEmployeeInforByUsernamePassword(user, pass);
+        //    EmployeeModel result = mapObj.Translate(employ);
+        //    return result;
+        //}
+        //public bool UpdateStatusEmployee(EmployeeModel employUpdate)
+        //{
+        //    EntityMapper<Model.EmployeeModel, EMPLOYEE> mapObj = new EntityMapper<Model.EmployeeModel, EMPLOYEE>();
+        //    EMPLOYEE employObj = mapObj.Translate(employUpdate);
+        //    return employDal.ChangeStatus(employUpdate.EmployID);
+        //}
     }
 }

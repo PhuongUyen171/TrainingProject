@@ -4,8 +4,12 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\DAL.dl
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\DAL.pdb
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\EntityFramework.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\Model.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\EntityFramework.xml
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\Model.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\bin\Debug\Model.dll.config
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\obj\Debug\DAL.csproj.CopyComplete
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\obj\Debug\DAL.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\obj\Debug\DAL.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\DAL\obj\Debug\DAL.csprojAssemblyReference.cache
