@@ -128,10 +128,6 @@ namespace DAL.DAL
         {
             return db.EMPLOYEEs.FirstOrDefault(t => t.EmployName == user);
         }
-        //public EMPLOYEE GetEmployeeInforByUsernamePassword(string user,string pass)
-        //{
-        //    return db.EMPLOYEEs.FirstOrDefault(x => x.EmployName == user && x.Pass==Encryptor.MD5Hash(pass));
-        //}
         public List<int> GetListPermisionByUsername(string username)
         {
             var user = db.EMPLOYEEs.SingleOrDefault(x => x.EmployName == username);
@@ -150,6 +146,5 @@ namespace DAL.DAL
                          });
             return roles.Select(x => x.RoleID).ToList();
         }
-
     }
 }

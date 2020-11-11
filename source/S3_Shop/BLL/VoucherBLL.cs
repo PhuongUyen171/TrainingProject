@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 using BLL.Common;
 using DAL.DAL;
 using DAL.EF;
+using Model;
 
 namespace BLL
 {
     public class VoucherBLL
     {
         private VoucherDAL vouDal = new VoucherDAL();
-        public List<Model.VoucherModel> GetAllVouchers()
+        public List<VoucherModel> GetAllVouchers()
         {
-            EntityMapper<VOUCHER, Model.VoucherModel> mapObj = new EntityMapper<VOUCHER, Model.VoucherModel>();
+            EntityMapper<VOUCHER, VoucherModel> mapObj = new EntityMapper<VOUCHER,VoucherModel>();
             List<VOUCHER> voucherList = vouDal.GetAllVouchers();
-            List<Model.VoucherModel> vouchers = new List<Model.VoucherModel>();
+            List<VoucherModel> vouchers = new List<VoucherModel>();
             foreach (var item in voucherList)
             {
                 vouchers.Add(mapObj.Translate(item));

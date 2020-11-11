@@ -80,10 +80,6 @@ namespace DAL.DAL
         {
             return db.CUSTOMERs.Where(t => t.CustomID == id).FirstOrDefault();
         }
-        //public bool ChechCustomerExist(string username, string password)
-        //{
-        //    return db.CUSTOMERs.Any(t => t.CustomName == username & t.Pass == Encryptor.MD5Hash(password));
-        //}
         public bool ChangeStatusCustomer(int userID)
         {
             try
@@ -118,27 +114,30 @@ namespace DAL.DAL
                 return 0;
             else if (cus.Pass != Encryptor.MD5Hash(pass))
                 return 0;
-            //else if (employ.Statu == false)
-            //    return -1;
-            //else if (employ.Pass != Encryptor.MD5Hash(pass))
-            //{
-            //    if (Model.Common.Constants.COUNT_LOGIN_FAIL_ADMIN == 3)
-            //    {
-            //        ChangeStatusEmployee(employ.EmployID);
-            //        return -3;
-            //    }
-            //    else
-            //    {
-            //        Model.Common.Constants.COUNT_LOGIN_FAIL_ADMIN++;
-            //        return -2;
-            //    }
-            //}
             else
                 return 1;
         }
         public CUSTOMER GetCustomerByUsername(string user)
         {
             return db.CUSTOMERs.SingleOrDefault(t => t.Username == user);
+        }
+        public CUSTOMER GetCustomerByEmail(string mail)
+        {
+            return db.CUSTOMERs.FirstOrDefault(t => t.Email == mail);
+        }
+        public bool ChangePasswordCustomer(string mail,string pass)
+        {
+            try
+            {
+                var acc = db.CUSTOMERs.SingleOrDefault(t => t.Email==mail);
+                acc.Pass = Encryptor.MD5Hash(pass);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

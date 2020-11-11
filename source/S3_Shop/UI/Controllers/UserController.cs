@@ -9,6 +9,9 @@ using UI.Models;
 using Model;
 using Model.Common;
 using WebMatrix.WebData;
+using System.Net.Mail;
+using System.Net;
+using System.Net.Http.Formatting;
 
 namespace UI.Controllers
 {
@@ -16,15 +19,12 @@ namespace UI.Controllers
     {
         string url;
         ServiceRepository serviceObj;
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
         public UserController()
         {
             serviceObj = new ServiceRepository();
             url = "https://localhost:44379/api/User_API/";
         }
+        #region quy trình đăng nhập user
         public ActionResult Login()
         {
             return View();
@@ -64,35 +64,16 @@ namespace UI.Controllers
                             //    ckPass.Value = model.Password;
                             //    Response.Cookies.Add(ckPass);
                             //}
-                            //Constants.COUNT_LOGIN_FAIL_ADMIN = 0;
                             return RedirectToAction("Index", "User");
                         }
                     case 0:
                         ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không tồn tại.");
                         break;
-                    //case -1:
-                    //    ModelState.AddModelError("", "Tài khoản đang bị khoá.");
-                    //    break;
-                    //case -2:
-                    //    ModelState.AddModelError("", "Mật khẩu không đúng.");
-                    //    break;
-                    //case -3:
-                    //    ModelState.AddModelError("", "Đăng nhập sai quá 3 lần. Tài khoản bạn đã bị khóa.");
-                    //    break;
                     default:
                         ModelState.AddModelError("", "Đăng nhập thất bại.");
                         break;
                 }
             }
-            return this.View();
-        }
-        public ActionResult Signin()
-        {
-            return View();
-        }
-        [HttpPost]
-        public ActionResult Signin(RegisterModel model)
-        {
             return this.View();
         }
         public ActionResult ForgotPassword()
@@ -104,34 +85,128 @@ namespace UI.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (WebSecurity.UserExists(model.Email))
-                //{
-                //    string To = model.Email, UserID, Password, SMTPPort, Host;
-                //    string token = WebSecurity.GeneratePasswordResetToken(model.Email);
-                //    if (token == null)
-                //    {
-                //        // If user does not exist or is not confirmed.  
-                //        return View("Index");
-                //    }
-                //    else
-                //    {
-                //        //Create URL with above token
-                //        var lnkHref = "<a href='" + Url.Action("ResetPassword", "Account", new { email = model.Email, code = token }, "http") + "'>Reset Password</a>";
-
-
-                //        //HTML Template for Send email
-                //        string subject = "Your changed password";
-                //        string body = "<b>Please find the Password Reset Link. </b><br/>" + lnkHref;
-
-                //        //Get and set the AppSettings using configuration manager.  
-                //        EmailManager.AppSettings(out UserID, out Password, out SMTPPort, out Host);
-
-                //        //Call send email methods.  
-                        EmailManager.SendPasswordResetEmail(model.Email,"you",);
-                //    }
-                //}
+                string resetCode = Guid.NewGuid().ToString();
+                var verifyUrl = "/User/ResetPassword?id=" + resetCode+"&mail="+model.Email;
+                var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+                HttpResponseMessage response = serviceObj.GetResponse(url + "GetCustomerByEmail?mail=" + model.Email);
+                response.EnsureSuccessStatusCode();
+                CustomerModel result = response.Content.ReadAsAsync<CustomerModel>().Result;
+                if (result != null)
+                {
+                    ResetPasswordModel resetModel = new ResetPasswordModel();
+                    resetModel.ResetCode = resetCode;
+                    resetModel.Id = result.CustomID;
+                    //This line I have added here to avoid confirm password not match issue , as we had added a confirm password property
+                    var subject = "Password Reset Request";
+                    var body = "Hi " + result.CustomName + ", <br/> You recently requested to reset your password for your account. Click the link below to reset it. " +
+                            " <br/><br/><a href='" + link + "'>" + link + "</a> <br/><br/>" +
+                            "If you did not request a password reset, please ignore this email or reply to let us know.<br/><br/> Thank you";
+                    SendEmail(result.Email, body, subject);
+                    ModelState.AddModelError("", "Mã code đã được gửi vào email của bạn");
+                }
+                else
+                    ModelState.AddModelError("", "Địa chỉ email không tồn tại.") ;
+                return View();
             }
             return View();
         }
+        private void SendEmail(string emailAddress, string body, string subject)
+        {
+            using (MailMessage mm = new MailMessage("mlem1701@gmail.com", emailAddress))
+            {
+                mm.Subject = subject;
+                mm.Body = body;
+                mm.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                NetworkCredential NetworkCred = new NetworkCredential("mlem1701@gmail.com", "ntpu1234");
+                smtp.UseDefaultCredentials = true;
+                smtp.Credentials = NetworkCred;
+                smtp.Port = 587;
+                smtp.Send(mm);
+            }
+        }
+        public CustomerModel GetCustomerByEmail(string mail)
+        {
+            HttpResponseMessage response = serviceObj.GetResponse(url + "GetCustomerByEmail?mail=" + mail);
+            response.EnsureSuccessStatusCode();
+            CustomerModel result = response.Content.ReadAsAsync<CustomerModel>().Result;
+            return result;
+        }
+        public ActionResult ResetPassword(string id,string mail)
+        {
+            if (string.IsNullOrWhiteSpace(id) || string.IsNullOrEmpty(mail))
+            {
+                return View("~/Views/Shared/404.cshtml");
+            }
+
+            //using (var context = new LoginRegistrationInMVCEntities())
+            //{
+            //var user = context.RegisterUsers.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
+            //if (user != null)
+            //{
+            HttpResponseMessage response = serviceObj.GetResponse(url + "GetCustomerByEmail?mail=" + mail);
+            response.EnsureSuccessStatusCode();
+            CustomerModel result = response.Content.ReadAsAsync<CustomerModel>().Result;
+            ResetPasswordModel mode = new ResetPasswordModel();
+            mode.Id = result.CustomID;
+            mode.Mail = mail;
+            mode.ResetCode = id;
+            return View(mode);
+                //}
+                //else
+                //{
+                //     return View("~/Views/Shared/404.cshtml");
+                //}
+            
+        }
+        //[HttpPost]
+        //public ActionResult ResetPassword(string id)
+        //{
+        //    if (string.IsNullOrWhiteSpace(id))
+        //        return View("404");
+        //    HttpResponseMessage response = serviceObj.GetResponse(url + "GetCustomerByEmail?mail=" + EmailID);
+        //    response.EnsureSuccessStatusCode();
+        //    CustomerModel result = response.Content.ReadAsAsync<CustomerModel>().Result;
+
+        //    if (result != null)
+        //    {
+        //        ResetPasswordModel model = new ResetPasswordModel();
+        //        model.ResetCode = id;
+        //        return View(model);
+        //    }
+        //    else
+        //        return View("404");
+        //    return View("Login");
+        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordModel model)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //HttpResponseMessage response = serviceObj.GetResponse(url + "GetCustomerByEmail/" + model.Mail);
+            //response.EnsureSuccessStatusCode();
+            CustomerModel resultReset = GetCustomerByEmail(model.Mail);
+            resultReset.Pass = model.NewPassword;
+                //    //var user = context.RegisterUsers.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
+                //    if (resultReset != null)
+                //    {
+                HttpResponseMessage responseUpdate = serviceObj.PutResponse(url + "UpdatePasswordCustomer", resultReset);
+                responseUpdate.EnsureSuccessStatusCode();
+                return RedirectToAction("Login");
+        }
+        #endregion
+        public ActionResult Signin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Signin(RegisterModel model)
+        {
+            return this.View();
+        }
+        
     }
 }

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Antlr.Runtime.Tree;
 using BLL;
 using Model;
 
@@ -23,6 +24,24 @@ namespace API.Controllers
         public CustomerModel GetCustomerByUsername(string user)
         {
             return cusBll.GetCustomerByUsername(user);
+        }
+        public CustomerModel GetCustomerByEmail(string mail)
+        {
+            return cusBll.GetCustomerByEmail(mail);
+        }
+        //public CustomerModel GetCustomerByID(int id)
+        //{
+        //    return cusBll.GetCustomerByID(id);
+        //}
+        [HttpPost]
+        public bool UpdatePasswordCustomer(CustomerModel model)
+        {
+            return cusBll.UpdatePasswordCustomer(model.CustomID,model.Pass);
+        }
+        [HttpPost]
+        public bool UpdateCustomer(CustomerModel model)
+        {
+            return cusBll.UpdateCustomer(model);
         }
     }
 }

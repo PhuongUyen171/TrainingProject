@@ -291,7 +291,8 @@ INSERT INTO CUSTOMER(CustomName,UserName,Phone,Email,Location,Pass,Statu,TotalPr
 (N'Nguyễn Xuân Nghi','xuannghi','0917320031','xuannghi@gmail.com',N'307 Nguyễn Văn Trỗi','202cb962ac59075b964b07152d234b70',1,0)
 INSERT INTO CUSTOMER(CustomName,UserName,Phone,Email,Location,Pass,Statu,TotalPrice) VALUES
 (N'Nguyễn Xuân Nhật','xuannhat','0917320123','xuannhat@gmail.com',N'307 Nguyễn Trãi','202cb962ac59075b964b07152d234b70',1,0)
-
+INSERT INTO CUSTOMER(CustomName,UserName,Phone,Email,Location,Pass,Statu,TotalPrice) VALUES
+(N'Nguyễn Thị Phương Uyên','phuonguyen','0917320123','nguyenthiphuonguyen.17.01.1999@gmail.com',N'140 Lê Trọng Tấn','202cb962ac59075b964b07152d234b70',1,0)
 
 -- COUNTRY
 INSERT [dbo].[Country] ([Id], [CountryCode], [CommonName], [FormalName], [CountryType], [CountrySubType], [Sovereignty], [Capital], [CurrencyCode], [CurrencyName], [TelephoneCode], [CountryCode3], [CountryNumber], [InternetCountryCode], [SortOrder], [IsPublished], [Flags], [IsDeleted]) VALUES (237, N'VN', N'Việt Nam', N'Socialist Republic of Vietnam', N'Independent State', NULL, NULL, N'Hanoi', N'VND', N'Dong', N'84', N'VNM', N'704', N'.vn', 1, 1, N'vn.png', 0)
@@ -12350,6 +12351,10 @@ SELECT * FROM DISTRICT
 SELECT * FROM PROVINCE
 SELECT * FROM WARD
 SELECT * FROM COUNTRY
-update Customer
-set pass='202cb962ac59075b964b07152d234b70'
-where CustomID=2
+
+update employee
+set statu=1
+where employid=2
+
+select * 
+

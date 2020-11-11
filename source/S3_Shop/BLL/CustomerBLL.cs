@@ -7,12 +7,14 @@ using BLL.Common;
 using DAL.DAL;
 using DAL.EF;
 using Model;
+using AutoMapper;
 
 namespace BLL
 {
     public class CustomerBLL
     {
         CustomerDAL customDal = new CustomerDAL();
+        #region Insert, Update, Delete
         public List<CustomerModel> GetAllCustomers()
         {
             EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel> mapObj = new EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel>();
@@ -24,11 +26,6 @@ namespace BLL
             }
             return (List<Model.CustomerModel>)customers;
         }
-        //public bool CheckCustomerExist(string user, string pass)
-        //{
-        //    bool customer = new CustomerDAL().ChechCustomerExist(user, pass);
-        //    return customer;
-        //}
         public bool InsertCustomer(CustomerModel cusInsert)
         {
             EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel,CUSTOMER>();
@@ -37,6 +34,13 @@ namespace BLL
         }
         public bool UpdateCustomer(CustomerModel cusUpdate)
         {
+            //EntityMapper<CustomerModel, CUSTOMER> mapObj = new EntityMapper<CustomerModel, CUSTOMER>();
+            //CUSTOMER cusObj = new CUSTOMER();
+            //var config = new MapperConfiguration(cfg => cfg.CreateMap<Models.Product, Product>());
+            //var mapper = new Mapper(config);
+            //productObj = mapper.Map<Product>(product);
+            //var status = DAL.UpdateProduct(productObj);
+            //return status;
             EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel, CUSTOMER>();
             CUSTOMER customObj = mapObj.Translate(cusUpdate);
             return customDal.UpdateCustomer(customObj);
@@ -45,6 +49,8 @@ namespace BLL
         {
             return customDal.DeleteCustomer(id);
         }
+        #endregion
+        #region Get by information
         public CustomerModel GetCustomerByID(int id)
         {
             EntityMapper<CUSTOMER, CustomerModel> mapObj = new EntityMapper<CUSTOMER, CustomerModel>();
@@ -59,13 +65,25 @@ namespace BLL
             CustomerModel result = mapObj.Translate(custom);
             return result;
         }
+        public CustomerModel GetCustomerByEmail(string mail)
+        {
+            EntityMapper<CUSTOMER, CustomerModel> mapObj = new EntityMapper<CUSTOMER, CustomerModel>();
+            CUSTOMER custom = customDal.GetCustomerByEmail(mail);
+            CustomerModel result = mapObj.Translate(custom);
+            return result;
+        }
+        #endregion
         public int LoginCustomer(string user, string pass)
         {
             //0: tài khoản ko tồn tại
-            //-1: Tài khoản đang bị khóa
-            //-2: Mật khẩu không đúng
             //1: Thành công
             return customDal.GetLoginResultByUsernamePassword(user, pass);
         }
+        public bool UpdatePasswordCustomer(int id, string pass)
+        {
+            var custom = GetCustomerByID(id);
+            return (custom != null) ? customDal.ChangePasswordCustomer(id+"", pass) : false;
+        }
+
     }
 }
