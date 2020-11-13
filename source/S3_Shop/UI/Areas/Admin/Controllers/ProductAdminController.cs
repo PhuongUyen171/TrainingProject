@@ -10,11 +10,11 @@ using Model.Common;
 
 namespace UI.Areas.Admin.Controllers
 {
-    public class ProductController : Controller
+    public class ProductAdminController : Controller
     {
         string url;
         ServiceRepository serviceObj;
-        public ProductController()
+        public ProductAdminController()
         {
             serviceObj = new ServiceRepository();
             url = "https://localhost:44379/api/Product_API/";

@@ -7,12 +7,14 @@ using BLL.Common;
 using DAL.DAL;
 using DAL.EF;
 using Model;
+using AutoMapper;
 
 namespace BLL
 {
     public class CustomerBLL
     {
         CustomerDAL customDal = new CustomerDAL();
+        #region Insert, Update, Delete
         public List<CustomerModel> GetAllCustomers()
         {
             EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel> mapObj = new EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel>();
@@ -22,22 +24,17 @@ namespace BLL
             {
                 customers.Add(mapObj.Translate(item));
             }
-            return (List<Model.CustomerModel>)customers;
-        }
-        public bool CheckCustomerExist(string user, string pass)
-        {
-            bool customer = new CustomerDAL().ChechCustomerExist(user, pass);
-            return customer;
+            return (List<CustomerModel>)customers;
         }
         public bool InsertCustomer(CustomerModel cusInsert)
         {
-            EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel,CUSTOMER>();
+            EntityMapper<CustomerModel, CUSTOMER> mapObj = new EntityMapper<CustomerModel,CUSTOMER>();
             CUSTOMER customObj  = mapObj.Translate(cusInsert);
             return customDal.InsertCustomer(customObj);
         }
         public bool UpdateCustomer(CustomerModel cusUpdate)
         {
-            EntityMapper<Model.CustomerModel, CUSTOMER> mapObj = new EntityMapper<Model.CustomerModel, CUSTOMER>();
+            EntityMapper<CustomerModel, CUSTOMER> mapObj = new EntityMapper<CustomerModel, CUSTOMER>();
             CUSTOMER customObj = mapObj.Translate(cusUpdate);
             return customDal.UpdateCustomer(customObj);
         }
@@ -45,6 +42,8 @@ namespace BLL
         {
             return customDal.DeleteCustomer(id);
         }
+        #endregion
+        #region Get by information
         public CustomerModel GetCustomerByID(int id)
         {
             EntityMapper<CUSTOMER, CustomerModel> mapObj = new EntityMapper<CUSTOMER, CustomerModel>();
@@ -52,5 +51,25 @@ namespace BLL
             CustomerModel result = mapObj.Translate(cus);
             return result;
         }
+        public CustomerModel GetCustomerByUsername(string user)
+        {
+            EntityMapper<CUSTOMER, CustomerModel> mapObj = new EntityMapper<CUSTOMER, CustomerModel>();
+            CUSTOMER custom = customDal.GetCustomerByUsername(user);
+            CustomerModel result = mapObj.Translate(custom);
+            return result;
+        }
+        public CustomerModel GetCustomerByEmail(string mail)
+        {
+            EntityMapper<CUSTOMER, CustomerModel> mapObj = new EntityMapper<CUSTOMER, CustomerModel>();
+            CUSTOMER custom = customDal.GetCustomerByEmail(mail);
+            CustomerModel result = mapObj.Translate(custom);
+            return result;
+        }
+        #endregion
+        public int LoginCustomer(string user, string pass)
+        {
+            return customDal.GetLoginResultByUsernamePassword(user, pass);
+        }
+
     }
 }

@@ -31,7 +31,7 @@
       <PropertyRef Name="CateID" />
     </Key>
     <Property Name="CateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="CateName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CateName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Images" Type="varchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -65,13 +65,13 @@ warning 6002: The table/view 'QL_Shop.dbo.COUNTRY' does not have a primary key d
       <PropertyRef Name="CustomID" />
     </Key>
     <Property Name="CustomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="varchar" MaxLength="500" />
+    <Property Name="Username" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="CustomName" Type="nvarchar" MaxLength="100" />
     <Property Name="Phone" Type="char" MaxLength="10" />
     <Property Name="Email" Type="varchar" MaxLength="100" />
     <Property Name="Location" Type="nvarchar(max)" />
     <Property Name="Pass" Type="varchar(max)" />
-    <Property Name="Statu" Type="bit" />
+    <Property Name="Statu" Type="bit" Nullable="false" />
     <Property Name="TotalPrice" Type="int" />
     <Property Name="MemID" Type="char" MaxLength="10" />
   </EntityType>
@@ -100,7 +100,7 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
     <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
     <Property Name="LastName" Type="nvarchar" MaxLength="50" />
     <Property Name="Pass" Type="varchar(max)" />
-    <Property Name="Statu" Type="bit" />
+    <Property Name="Statu" Type="bit" Nullable="false" />
     <Property Name="GroupID" Type="char" MaxLength="10" />
   </EntityType>
   <EntityType Name="GROUPADMIN">
@@ -108,14 +108,14 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
       <PropertyRef Name="GroupID" />
     </Key>
     <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
-    <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="MEMBERSHIP">
     <Key>
       <PropertyRef Name="MemID" />
     </Key>
     <Property Name="MemID" Type="char" MaxLength="10" Nullable="false" />
-    <Property Name="MemName" Type="nvarchar" MaxLength="50" />
+    <Property Name="MemName" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="MinPrice" Type="int" />
     <Property Name="MaxPrice" Type="int" />
     <Property Name="Sale" Type="int" />
@@ -125,7 +125,7 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
       <PropertyRef Name="NewsID" />
     </Key>
     <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Images" Type="varchar" MaxLength="50" />
     <Property Name="Descrip" Type="nvarchar(max)" />
     <Property Name="PublishDate" Type="date" />
@@ -186,16 +186,6 @@ warning 6002: The table/view 'QL_Shop.dbo.PROVINCE' does not have a primary key 
     <Property Name="Phone" Type="char" MaxLength="10" />
     <Property Name="City" Type="nvarchar" MaxLength="50" />
     <Property Name="Images" Type="varchar" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="VOUCHER">
     <Key>
@@ -345,37 +335,6 @@ warning 6002: The table/view 'QL_Shop.dbo.WARD' does not have a primary key defi
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="version" Type="int" Mode="In" />
-    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-    <Parameter Name="owner_id" Type="int" Mode="In" />
-    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-  </Function>
-  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="QL_ShopModelStoreContainer">
     <EntitySet Name="BILL" EntityType="Self.BILL" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BILLINFO" EntityType="Self.BILLINFO" Schema="dbo" store:Type="Tables" />
@@ -389,7 +348,6 @@ warning 6002: The table/view 'QL_Shop.dbo.WARD' does not have a primary key defi
     <EntitySet Name="PRODUCT" EntityType="Self.PRODUCT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="STORE" EntityType="Self.STORE" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VOUCHER" EntityType="Self.VOUCHER" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

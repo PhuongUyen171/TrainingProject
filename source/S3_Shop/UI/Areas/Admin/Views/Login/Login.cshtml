@@ -23,7 +23,7 @@
                     <h1 style="font-size:25px; font-weight:bold; text-align:center;">ĐĂNG NHẬP ADMIN</h1>
                     @Html.TextBoxFor(model => model.UserName, new { @placeholder = "Tên đăng nhập ...", @class = "txt" })
                     @Html.PasswordFor(model => model.Password, new { @placeholder = "Mật khẩu ...", @class = "txt" })
-                    @Html.CheckBoxFor(model => model.RememberMe, new { @style="text-align:left;display:inline-block;", @class="pull-left"})<p style="text-align:left">Remember me</p> 
+                    @Html.CheckBoxFor(model => model.RememberMe, new { @style = "text-align:left;display:inline-block;", @class = "pull-left" })<p style="text-align:left">Remember me</p> 
                     <button type="submit" class="btn button-login">ĐĂNG NHẬP</button>
 
                     <div class="warning">
@@ -36,7 +36,8 @@
             </div>
             <div class="col-lg-4 col-md-1 col-sm-1"></div>
         </div>
-    }
+            
+        }
 </body>
 </html>
 <style>

@@ -20,11 +20,12 @@ namespace UI.Areas.Admin.Controllers
             serviceObj = new ServiceRepository();
             url = "https://localhost:44379/api/Employee_API/";
         }
+
         public ActionResult Index(string user, string pass)
         {
             try
             {
-                HttpResponseMessage response = serviceObj.GetResponse(url + "GetEmployeeInforByUsernamePassword/?user=" + user + "&pass=" + pass);
+                HttpResponseMessage response = serviceObj.GetResponse(url + "GetEmployeeByUsername?user=" + user);
                 response.EnsureSuccessStatusCode();
                 Model.EmployeeModel resultLogin = response.Content.ReadAsAsync<Model.EmployeeModel>().Result;
                 return View(resultLogin);
@@ -35,6 +36,19 @@ namespace UI.Areas.Admin.Controllers
             }
             
         }
+        [HttpPost]
+        public ActionResult Index(EmployeeModel emUpdate)
+        {
+            HttpResponseMessage response = serviceObj.PutResponse(url + "UpdateEmployee",emUpdate);
+            response.EnsureSuccessStatusCode();
+            bool resultUpdate = response.Content.ReadAsAsync<bool>().Result;
+            if (resultUpdate)
+                ViewBag.Result = "Thành công";
+            else
+                ViewBag.Result = "Thất bại";
+            return View();
+        }
+
         public ActionResult Logout()
         {
             try
@@ -52,6 +66,7 @@ namespace UI.Areas.Admin.Controllers
                     ckPass.Expires = DateTime.Now.AddHours(-48);
                     Response.Cookies.Add(ckPass);
                 }
+                Constants.COUNT_LOGIN_FAIL_ADMIN = 0;
                 return View("Login");
             }
             catch (Exception)
@@ -78,7 +93,7 @@ namespace UI.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                HttpResponseMessage response = serviceObj.GetResponse(url + "GetEmployeeByUsernamePassword/?user=" + model.UserName + "&pass=" + model.Password);
+                HttpResponseMessage response = serviceObj.GetResponse(url + "GetLoginResultByUsernamePassword?user=" + model.UserName + "&pass=" + model.Password);
                 response.EnsureSuccessStatusCode();
                 int resultLogin = response.Content.ReadAsAsync<int>().Result;
                 switch (resultLogin)
@@ -123,30 +138,10 @@ namespace UI.Areas.Admin.Controllers
                         ModelState.AddModelError("", "Tài khoản đang bị khoá.");
                         break;
                     case -2:
-                        if (Constants.COUNT_LOGIN_FAIL_ADMIN == 3)
-                        {
-                            HttpResponseMessage responseUser = serviceObj.GetResponse(url + "GetEmployeeByUsername?user=" + model.UserName);
-                            responseUser.EnsureSuccessStatusCode();
-                            /*[HttpPost]
-        //Không tác động thêm xóa sỬA
-        public ActionResult UpdateRole(RoleModel role)
-        {
-            HttpResponseMessage response = serviceObj.PutResponse(url + "UpdateRole/", role);
-            response.EnsureSuccessStatusCode();
-            return RedirectToAction("Index");
-        }*/
-                            EmployeeModel employLogin = responseUser.Content.ReadAsAsync<EmployeeModel>().Result;
-                            //Chưa gọn: rảnh xử lý cho gọn
-                            if(UpdateStatusEmployee(employLogin))
-                                ModelState.AddModelError("", "Đăng nhập sai quá 3 lần. Tài khoản bạn đã bị khóa.");
-                            else
-                                ModelState.AddModelError("", "Đăng nhập sai quá 3 lần. Tài khoản không khóa được");
-                        }
-                        else
-                        {
-                            Constants.COUNT_LOGIN_FAIL_ADMIN++;
-                            ModelState.AddModelError("", "Mật khẩu không đúng.");
-                        }
+                        ModelState.AddModelError("", "Mật khẩu không đúng.");
+                        break;
+                    case -3:
+                        ModelState.AddModelError("", "Đăng nhập sai quá 3 lần. Tài khoản bạn đã bị khóa.");
                         break;
                     default:
                         ModelState.AddModelError("", "Đăng nhập thất bại.");
@@ -154,21 +149,6 @@ namespace UI.Areas.Admin.Controllers
                 }
             }
             return this.View();
-        }
-        [HttpPost]
-        public bool UpdateStatusEmployee(EmployeeModel employLogin)
-        {
-            try
-            {
-                HttpResponseMessage responseBlock = serviceObj.PutResponse(url + "UpdateStatusEmployee/", employLogin);
-                responseBlock.EnsureSuccessStatusCode();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            
         }
         public LoginModel CheckAccount()
         {
@@ -183,44 +163,5 @@ namespace UI.Areas.Admin.Controllers
                 result = new LoginModel { UserName = username, Password = password};
             return result;
         }
-            //{
-            //    var dao = new customerdaL();
-            //    var result = dao.Login(model.UserName, Encryptor.MD5Hash(model.Password), true);
-            //    if (result == 1)
-            //    {
-            //        var user = dao.GetById(model.UserName);
-            //        var userSession = new UserLogin();
-            //        userSession.UserName = user.UserName;
-            //        userSession.UserID = user.ID;
-            //        userSession.GroupID = user.GroupID;
-            //        var listCredentials = dao.GetListCredential(model.UserName);
-
-            //        Session.Add(CommonConstants.SESSION_CREDENTIALS, listCredentials);
-            //        Session.Add(CommonConstants.USER_SESSION, userSession);
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //    else if (result == 0)
-            //    {
-            //        ModelState.AddModelError("", "Tài khoản không tồn tại.");
-            //    }
-            //    else if (result == -1)
-            //    {
-            //        ModelState.AddModelError("", "Tài khoản đang bị khoá.");
-            //    }
-            //    else if (result == -2)
-            //    {
-            //        ModelState.AddModelError("", "Mật khẩu không đúng.");
-            //    }
-            //    else if (result == -3)
-            //    {
-            //        ModelState.AddModelError("", "Tài khoản của bạn không có quyền đăng nhập.");
-            //    }
-            //    else
-            //    {
-            //        ModelState.AddModelError("", "đăng nhập không đúng.");
-            //    }
-            //}
-            //return View("Index");
-        
     }
 }

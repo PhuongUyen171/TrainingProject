@@ -1,4 +1,4 @@
-C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.csprojAssemblyReference.cache
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.csproj.CoreCompileInputs.cache
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\UI.dll.config
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\UI.dll
@@ -9,7 +9,6 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\csc.rs
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\csi.exe
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\csi.rsp
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
@@ -29,7 +28,6 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\vbc.ex
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\vbc.rsp
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\VBCSCompiler.exe
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\API.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\EntityFramework.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\EntityFramework.SqlServer.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -76,3 +74,11 @@ C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\DAL.dll.confi
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.csproj.CopyComplete
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.dll
 C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\API.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\WebMatrix.Data.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\WebMatrix.WebData.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\WebMatrix.Data.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\WebMatrix.WebData.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\obj\Debug\UI.csprojAssemblyReference.cache
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\Newtonsoft.Json.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\UI\bin\System.Net.Http.Formatting.xml
