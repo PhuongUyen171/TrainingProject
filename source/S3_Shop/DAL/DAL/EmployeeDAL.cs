@@ -20,6 +20,7 @@ namespace DAL.DAL
         {
             try
             {
+                employee.Pass = Encryptor.MD5Hash(employee.Pass);
                 db.EMPLOYEEs.Add(employee);
                 db.SaveChanges();
                 return true;
@@ -56,7 +57,7 @@ namespace DAL.DAL
                     itemUpdate.EmployName = employee.EmployName;
                     itemUpdate.FirstName = employee.FirstName;
                     itemUpdate.LastName = employee.LastName;
-                    itemUpdate.Pass = employee.Pass;
+                    itemUpdate.Pass = Encryptor.MD5Hash(employee.Pass);
                     itemUpdate.Statu = employee.Statu;
                     itemUpdate.GroupID = employee.GroupID;
                     db.SaveChanges();
@@ -82,22 +83,34 @@ namespace DAL.DAL
             //0: tài khoản ko tồn tại
             //-1: Tài khoản đang bị khóa
             //-2: Mật khẩu không đúng
+            //-3: Khóa tài khoản vì đăng nhập quá ba lần
             //1: Thành công
             var employ = db.EMPLOYEEs.FirstOrDefault(x => x.EmployName == user);
             if (employ == null) 
                 return 0;
             else if (employ.Statu == false) 
                 return -1;
-            else if (employ.Pass != pass) 
-                return -2;
+            else if (employ.Pass != Encryptor.MD5Hash(pass))
+            {
+                if (Model.Common.Constants.COUNT_LOGIN_FAIL_ADMIN == 3)
+                {
+                    ChangeStatusEmployee(employ.EmployID);
+                    return -3;
+                }
+                else
+                {
+                    Model.Common.Constants.COUNT_LOGIN_FAIL_ADMIN++;
+                    return -2;
+                }    
+            } 
             else 
                 return 1;
         }
         public bool CheckEmployeeExist(string adminName,string pass)
         {
-            return db.EMPLOYEEs.Any(t => t.EmployName==adminName & t.Pass == pass);
+            return db.EMPLOYEEs.Any(t => t.EmployName==adminName & t.Pass == Encryptor.MD5Hash(pass));
         }
-        public bool ChangeStatus(int id)
+        public bool ChangeStatusEmployee(int id)
         {
             try
             {
@@ -114,11 +127,6 @@ namespace DAL.DAL
         public EMPLOYEE GetEmployeeByUsername(string user)
         {
             return db.EMPLOYEEs.FirstOrDefault(t => t.EmployName == user);
-        }
-        public EMPLOYEE GetEmployeeInforByUsernamePassword(string user,string pass)
-        {
-            var employ = db.EMPLOYEEs.FirstOrDefault(x => x.EmployName == user);
-            return employ;
         }
         public List<int> GetListPermisionByUsername(string username)
         {
@@ -138,6 +146,5 @@ namespace DAL.DAL
                          });
             return roles.Select(x => x.RoleID).ToList();
         }
-
     }
 }

@@ -5,6 +5,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using DAL.EF;
+using DAL.Common;
 
 namespace DAL.DAL
 {
@@ -24,6 +25,7 @@ namespace DAL.DAL
         {
             try
             {
+                custom.Pass = Encryptor.MD5Hash(custom.Pass);
                 db.CUSTOMERs.Add(custom);
                 db.SaveChanges();
                 return true;
@@ -61,7 +63,7 @@ namespace DAL.DAL
                     itemUpdate.Email = custom.Email;
                     itemUpdate.Location = custom.Location;
                     itemUpdate.Phone = custom.Phone;
-                    itemUpdate.Pass = custom.Pass;
+                    itemUpdate.Pass = Encryptor.MD5Hash(custom.Pass);
                     itemUpdate.MemID = custom.MemID;
                     itemUpdate.Statu = custom.Statu;
                     itemUpdate.TotalPrice = custom.TotalPrice;
@@ -75,19 +77,17 @@ namespace DAL.DAL
             }
         }
         #endregion
+
+        #region Get information customer
         public CUSTOMER GetCustomerByID(int id)
         {
             return db.CUSTOMERs.Where(t => t.CustomID == id).FirstOrDefault();
         }
-        public bool ChechCustomerExist(string username, string password)
-        {
-            return db.CUSTOMERs.Any(t => t.CustomName == username & t.Pass == password);
-        }
-        public bool ChangeStatusCustomer(string username)
+        public bool ChangeStatusCustomer(int userID)
         {
             try
             {
-                var acc = db.CUSTOMERs.SingleOrDefault(x => x.CustomName==username);
+                var acc = db.CUSTOMERs.SingleOrDefault(x => x.CustomID==userID);
                 acc.Statu = !acc.Statu;
                 db.SaveChanges();
                 return true;
@@ -97,16 +97,26 @@ namespace DAL.DAL
                 return false;
             }
         }
-        public bool LoginCustomer(string username, string pass)
+        public int GetLoginResultByUsernamePassword(string user, string pass)
         {
-            try
-            {
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            //0: Tên đăng nhập hoặc mật khẩu không tồn tại
+            //1: Thành công
+            var cus = db.CUSTOMERs.FirstOrDefault(x => x.Username == user);
+            if (cus == null)
+                return 0;
+            else if (cus.Pass != Encryptor.MD5Hash(pass))
+                return 0;
+            else
+                return 1;
         }
+        public CUSTOMER GetCustomerByUsername(string user)
+        {
+            return db.CUSTOMERs.SingleOrDefault(t => t.Username == user);
+        }
+        public CUSTOMER GetCustomerByEmail(string mail)
+        {
+            return db.CUSTOMERs.FirstOrDefault(t => t.Email == mail);
+        }
+        #endregion
     }
 }

@@ -19,7 +19,7 @@ namespace API.Areas.Admin.Controllers
         {
             return empBLL.GetAllEmployees();
         }
-        public int GetEmployeeByUsernamePassword(string user, string pass)
+        public int GetLoginResultByUsernamePassword(string user, string pass)
         {
             return empBLL.LoginEmployee(user, pass);
         }
@@ -27,15 +27,11 @@ namespace API.Areas.Admin.Controllers
         {
             return empBLL.GetEmployeeByUsername(user);
         }
-        public EmployeeModel GetEmployeeInforByUsernamePassword(string user, string pass)
-        {
-            return empBLL.GetEmployeeInforByUsernamePassword(user, pass);
-        }
-        [HttpPut]
-        public bool UpdateStatusEmployee(EmployeeModel user)
-        {
-            return empBLL.UpdateStatusEmployee(user);
-        }
+        //public EmployeeModel GetEmployeeInforByUsernamePassword(string user, string pass)
+        //{
+        //    return empBLL.GetEmployeeInforByUsernamePassword(user, pass);
+        //}
+       
         public EmployeeModel GetEmployeeByID(int id)
         {
             return empBLL.GetEmployeeByID(id);
@@ -44,6 +40,10 @@ namespace API.Areas.Admin.Controllers
         {
             return empBLL.GetPermisionByUsername(name);
         }
-       
+        [HttpPut]
+        public bool UpdateEmployee(EmployeeModel emUpdate)
+        {
+            return empBLL.UpdateEmployee(emUpdate);
+        }
     }
 }

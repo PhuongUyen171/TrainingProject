@@ -1,0 +1,49 @@
+﻿@model Model.CustomerModel
+@*<link href="~/Content/cssMain.css" rel="stylesheet" />*@
+<div class="account_user">
+    @{
+
+        if (Session["USER_SESSION"] != null)
+        {
+            <ul>
+                <li>@Model.CustomName</li>
+                <li>@Html.ActionLink("Thoát", "Logout", "User")</li>
+                <li><i class="fas fa-cart-arrow-down" style="font-size:20px"></i></li>
+            </ul>
+        }
+        else
+        {
+            <ul>
+                <li>@Html.ActionLink("Đăng nhập", "Login", "User")</li>
+                <li>@Html.ActionLink("Đăng ký", "Signin", "User")</li>
+                <li><i class="fas fa-cart-arrow-down" style="font-size:20px"></i></li>
+            </ul>
+        }
+
+    }
+</div>
+<style>
+    .account_user {
+        float: right;
+    }
+
+        .account_user li {
+            display: inline;
+            border-left: 1px dotted #CCC;
+        }
+
+            .account_user li:first-child {
+                border: none;
+            }
+
+            .account_user li a {
+                font-size: 16px;
+                color: black;
+                padding: 0 10px;
+            }
+
+                .account_user li a:hover {
+                    color: #ffb0bd;
+                }
+</style>
+

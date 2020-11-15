@@ -319,4 +319,27 @@ table tbody tr:hover {
 table tbody tr.row-selected {
     background-color: #a4befc;
 }
+/*Account-user*/
+.account_user {
+    float: right;
+}
+
+    .account_user li {
+        display: inline;
+        border-left: 1px dotted #CCC;
+    }
+
+        .account_user li:first-child {
+            border: none;
+        }
+
+        .account_user li a {
+            font-size: 16px;
+            color: #9C9C9C;
+            padding: 0 10px;
+        }
+
+            .account_user li a:hover {
+                color: #ffb0bd;
+            }
 
