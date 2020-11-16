@@ -31,7 +31,7 @@ namespace API.Areas.Admin.Controllers
         //{
         //    return empBLL.GetEmployeeInforByUsernamePassword(user, pass);
         //}
-       
+        [HttpPut]
         public EmployeeModel GetEmployeeByID(int id)
         {
             return empBLL.GetEmployeeByID(id);
@@ -40,10 +40,6 @@ namespace API.Areas.Admin.Controllers
         {
             return empBLL.GetPermisionByUsername(name);
         }
-        [HttpPut]
-        public bool UpdateEmployee(EmployeeModel emUpdate)
-        {
-            return empBLL.UpdateEmployee(emUpdate);
-        }
+       
     }
 }

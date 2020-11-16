@@ -24,7 +24,7 @@ namespace UI.Controllers
             serviceObj = new ServiceRepository();
             url = "https://localhost:44379/api/User_API/";
         }
-        #region quy trình đăng nhập user
+        #region chức đăng nhập user
         public ActionResult Login()
         {
             return View();
@@ -76,6 +76,9 @@ namespace UI.Controllers
             }
             return this.View();
         }
+        #endregion
+
+        #region chức năng quên mật khẩu
         public ActionResult ForgotPassword()
         {
             return View();
@@ -140,42 +143,28 @@ namespace UI.Controllers
             {
                 return View("~/Views/Shared/404.cshtml");
             }
-
-            //using (var context = new LoginRegistrationInMVCEntities())
-            //{
-            //var user = context.RegisterUsers.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
-            //if (user != null)
-            //{
-            //HttpResponseMessage response = serviceObj.GetResponse(url + "GetCustomerByEmail?mail=" + mail);
-            //response.EnsureSuccessStatusCode();
-            CustomerModel result = GetCustomerByEmail(mail);
+            HttpResponseMessage response = serviceObj.GetResponse(url + "GetCustomerByEmail?mail=" + mail);
+            response.EnsureSuccessStatusCode();
+            CustomerModel result = response.Content.ReadAsAsync<CustomerModel>().Result;
             ResetPasswordModel mode = new ResetPasswordModel();
             mode.Id = result.CustomID;
             mode.Mail = mail;
             mode.ResetCode = id;
             return View(mode);
-                //}
-                //else
-                //{
-                //     return View("~/Views/Shared/404.cshtml");
-                //}
-            
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ResetPassword(ResetPasswordModel model)
         {
             CustomerModel resultReset = GetCustomerByEmail(model.Mail);
-            resultReset.Pass =  model.NewPassword;
-            HttpResponseMessage responseUpdate = serviceObj.PutResponse(url + "UpdateCustomer", resultReset);
+            resultReset.Pass = Encryptor.MD5Hash(model.NewPassword);
+            HttpResponseMessage responseUpdate = serviceObj.PutResponse(url + "UpdatePasswordCustomer", resultReset);
             responseUpdate.EnsureSuccessStatusCode();
-            bool result= responseUpdate.Content.ReadAsAsync<bool>().Result;
-            if (result)
-                return RedirectToAction("Login");
-            ViewBag.Warning = "Có lỗi xảy ra trong quá trình đặt lại mật khẩu.";
-            return this.View();
+            return RedirectToAction("Login");
         }
         #endregion
+
+        #region chức năng đăng kí user: chưa làm
         public ActionResult Signin()
         {
             return View();
@@ -185,6 +174,6 @@ namespace UI.Controllers
         {
             return this.View();
         }
-        
+        #endregion
     }
 }

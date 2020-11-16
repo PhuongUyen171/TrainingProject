@@ -10,8 +10,6 @@
         <img src="~/Content/Image/cat.jpg" width="100%" style="margin:15px;" />
     </div>
     <div class="col-lg-8">
-        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
-        {
         <table>
             <tr style="font-weight:bold">Username:</tr>
             <tr>@Html.TextBoxFor(Model => Model.EmployName, new { @style = "width:100%;height:40px;margin-bottom:20px;" })</tr>
@@ -22,13 +20,8 @@
             <tr style="font-weight:bold">Status: </tr>
             <tr>Đang hoạt động</tr>
             <br />
-            @Html.HiddenFor(Model=>Model.EmployID)
-            @Html.HiddenFor(Model=>Model.GroupID)
-            @Html.HiddenFor(Model=>Model.Pass)
-            <tr><button type="submit" class="btn btn-pink">Update your profile</button></tr>
-        </table><br />
-        <font style="color:#7c1b1b">@ViewBag.Result</font>
-        }
+            <tr><button class="btn btn-pink">Update your profile</button></tr>
+        </table>
     </div>
 </div>
 <style>

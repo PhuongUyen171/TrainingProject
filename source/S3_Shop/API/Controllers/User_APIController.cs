@@ -29,7 +29,16 @@ namespace API.Controllers
         {
             return cusBll.GetCustomerByEmail(mail);
         }
-        [HttpPut]
+        //public CustomerModel GetCustomerByID(int id)
+        //{
+        //    return cusBll.GetCustomerByID(id);
+        //}
+        [HttpPost]
+        public bool UpdatePasswordCustomer(CustomerModel model)
+        {
+            return cusBll.UpdatePasswordCustomer(model.CustomID,model.Pass);
+        }
+        [HttpPost]
         public bool UpdateCustomer(CustomerModel model)
         {
             return cusBll.UpdateCustomer(model);

@@ -111,7 +111,7 @@ CREATE TABLE PERMISION
 (
 	RoleID INT FOREIGN KEY (RoleID) REFERENCES ROLES(RoleID),
 	GroupID CHAR(10) FOREIGN KEY (GroupID) REFERENCES GROUPADMIN(GroupID),
-	PerID BIT DEFAULT 0 NOT NULL, -- 1 là có quyền, 0 là không có quyền
+	PerID BIT DEFAULT 0, -- 1 là có quyền, 0 là không có quyền
 	PRIMARY KEY (RoleID, GroupID)
 )
 CREATE TABLE COUNTRY
@@ -12357,17 +12357,4 @@ set statu=1
 where employid=2
 
 select * 
-SET DATEFORMAT DMY
-INSERT INTO NEWS(Title,Images, Descrip, PublishDate) VALUES('Moji Homeware','tin6.jpg',N'Tuần này Moji đã quay lại và mang tới cho các bạn bộ sưu tập đồ trang trí nhà cửa đây, đảm bảo siêu bắt mắt và xinh lung linh luôn ~
-Có một căn phòng thiệt xinh xắn thì sau khi tan ca hay tan trường là chỉ muốn về nhà ngay thui ý. Dù bạn thích style màu mè đáng iu hay đen trắng tối giản thì Moji cũng đều có những gợi ý thú vị cho bạn ở bên dưới đóoo
-Đồ dùng nhà bếp cute phomai que cũng khiến chúng mình hăng say nấu nướng và hông bao giờ bỏ bữa. Với team sống ảo thì tậu các em này đúng là một công thỏa mãn 2 đam mê, vừa ăn uống vừa chụp choẹt luôn nhá
-Ngoài ra thì còn những vật dụng cá nhân nhỏ xinh siêu tiện lợi và hữu ích như gương lược, túi đựng mỹ phẩm hay quạt cầm tay,... cũng là các em bé hem thể thiếu khi ra ngoài nha','11/11/2020')
-INSERT INTO NEWS(Title,Images, Descrip, PublishDate) VALUES('Moji Adventure','tin7.jpg',N'Tuần này Moji đã quay lại và mang tới cho các bạn bộ sưu tập đồ trang trí nhà cửa đây, đảm bảo siêu bắt mắt và xinh lung linh luôn ~
-Có một căn phòng thiệt xinh xắn thì sau khi tan ca hay tan trường là chỉ muốn về nhà ngay thui ý. Dù bạn thích style màu mè đáng iu hay đen trắng tối giản thì Moji cũng đều có những gợi ý thú vị cho bạn ở bên dưới đóoo
-Đồ dùng nhà bếp cute phomai que cũng khiến chúng mình hăng say nấu nướng và hông bao giờ bỏ bữa. Với team sống ảo thì tậu các em này đúng là một công thỏa mãn 2 đam mê, vừa ăn uống vừa chụp choẹt luôn nhá
-Ngoài ra thì còn những vật dụng cá nhân nhỏ xinh siêu tiện lợi và hữu ích như gương lược, túi đựng mỹ phẩm hay quạt cầm tay,... cũng là các em bé hem thể thiếu khi ra ngoài nha','11/11/2020')
-INSERT INTO NEWS(Title,Images, Descrip, PublishDate) VALUES('Mùa nông sản','tin1.jpg',N'Tuần này Moji đã quay lại và mang tới cho các bạn bộ sưu tập đồ trang trí nhà cửa đây, đảm bảo siêu bắt mắt và xinh lung linh luôn ~
-Có một căn phòng thiệt xinh xắn thì sau khi tan ca hay tan trường là chỉ muốn về nhà ngay thui ý. Dù bạn thích style màu mè đáng iu hay đen trắng tối giản thì Moji cũng đều có những gợi ý thú vị cho bạn ở bên dưới đóoo
-Đồ dùng nhà bếp cute phomai que cũng khiến chúng mình hăng say nấu nướng và hông bao giờ bỏ bữa. Với team sống ảo thì tậu các em này đúng là một công thỏa mãn 2 đam mê, vừa ăn uống vừa chụp choẹt luôn nhá
-Ngoài ra thì còn những vật dụng cá nhân nhỏ xinh siêu tiện lợi và hữu ích như gương lược, túi đựng mỹ phẩm hay quạt cầm tay,... cũng là các em bé hem thể thiếu khi ra ngoài nha','11/11/2020')
 

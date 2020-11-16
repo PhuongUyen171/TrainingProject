@@ -1,0 +1,6 @@
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\ShopMoji\BLL\bin\Debug\BLL.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\ShopMoji\BLL\bin\Debug\BLL.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\ShopMoji\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\ShopMoji\BLL\obj\Debug\BLL.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\ShopMoji\BLL\obj\Debug\BLL.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\ShopMoji\BLL\obj\Debug\BLL.csprojAssemblyReference.cache

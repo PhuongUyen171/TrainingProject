@@ -21,6 +21,7 @@ namespace UI.Areas.Admin.Controllers
             url = "https://localhost:44379/api/Employee_API/";
         }
 
+        [Route("profile-admin/{user}")]
         public ActionResult Index(string user, string pass)
         {
             try
@@ -36,19 +37,8 @@ namespace UI.Areas.Admin.Controllers
             }
             
         }
-        [HttpPost]
-        public ActionResult Index(EmployeeModel emUpdate)
-        {
-            HttpResponseMessage response = serviceObj.PutResponse(url + "UpdateEmployee",emUpdate);
-            response.EnsureSuccessStatusCode();
-            bool resultUpdate = response.Content.ReadAsAsync<bool>().Result;
-            if (resultUpdate)
-                ViewBag.Result = "Thành công";
-            else
-                ViewBag.Result = "Thất bại";
-            return View();
-        }
 
+        [Route("dang-xuat")]
         public ActionResult Logout()
         {
             try
@@ -66,7 +56,6 @@ namespace UI.Areas.Admin.Controllers
                     ckPass.Expires = DateTime.Now.AddHours(-48);
                     Response.Cookies.Add(ckPass);
                 }
-                Constants.COUNT_LOGIN_FAIL_ADMIN = 0;
                 return View("Login");
             }
             catch (Exception)
@@ -89,6 +78,7 @@ namespace UI.Areas.Admin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Route("profile-admin/{user}")]
         public ActionResult Login(LoginModel model)
         {
             if (ModelState.IsValid)

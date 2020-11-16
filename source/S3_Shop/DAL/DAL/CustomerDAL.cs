@@ -25,7 +25,6 @@ namespace DAL.DAL
         {
             try
             {
-                custom.Pass = Encryptor.MD5Hash(custom.Pass);
                 db.CUSTOMERs.Add(custom);
                 db.SaveChanges();
                 return true;
@@ -63,7 +62,7 @@ namespace DAL.DAL
                     itemUpdate.Email = custom.Email;
                     itemUpdate.Location = custom.Location;
                     itemUpdate.Phone = custom.Phone;
-                    itemUpdate.Pass = Encryptor.MD5Hash(custom.Pass);
+                    itemUpdate.Pass = custom.Pass;
                     itemUpdate.MemID = custom.MemID;
                     itemUpdate.Statu = custom.Statu;
                     itemUpdate.TotalPrice = custom.TotalPrice;
@@ -95,6 +94,17 @@ namespace DAL.DAL
                 return false;
             }
         }
+        public bool LoginCustomer(string username, string pass)
+        {
+            try
+            {
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public int GetLoginResultByUsernamePassword(string user, string pass)
         {
             //0: Tên đăng nhập hoặc mật khẩu không tồn tại
@@ -114,6 +124,20 @@ namespace DAL.DAL
         public CUSTOMER GetCustomerByEmail(string mail)
         {
             return db.CUSTOMERs.FirstOrDefault(t => t.Email == mail);
+        }
+        public bool ChangePasswordCustomer(string mail,string pass)
+        {
+            try
+            {
+                var acc = db.CUSTOMERs.SingleOrDefault(t => t.Email==mail);
+                acc.Pass = Encryptor.MD5Hash(pass);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }
