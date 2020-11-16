@@ -25,6 +25,7 @@ namespace DAL.DAL
         {
             try
             {
+                custom.Pass = Encryptor.MD5Hash(custom.Pass);
                 db.CUSTOMERs.Add(custom);
                 db.SaveChanges();
                 return true;
@@ -62,7 +63,7 @@ namespace DAL.DAL
                     itemUpdate.Email = custom.Email;
                     itemUpdate.Location = custom.Location;
                     itemUpdate.Phone = custom.Phone;
-                    itemUpdate.Pass = custom.Pass;
+                    itemUpdate.Pass = Encryptor.MD5Hash(custom.Pass);
                     itemUpdate.MemID = custom.MemID;
                     itemUpdate.Statu = custom.Statu;
                     itemUpdate.TotalPrice = custom.TotalPrice;
@@ -76,6 +77,8 @@ namespace DAL.DAL
             }
         }
         #endregion
+
+        #region Get information customer
         public CUSTOMER GetCustomerByID(int id)
         {
             return db.CUSTOMERs.Where(t => t.CustomID == id).FirstOrDefault();
@@ -87,17 +90,6 @@ namespace DAL.DAL
                 var acc = db.CUSTOMERs.SingleOrDefault(x => x.CustomID==userID);
                 acc.Statu = !acc.Statu;
                 db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-        public bool LoginCustomer(string username, string pass)
-        {
-            try
-            {
                 return true;
             }
             catch (Exception)
@@ -125,19 +117,6 @@ namespace DAL.DAL
         {
             return db.CUSTOMERs.FirstOrDefault(t => t.Email == mail);
         }
-        public bool ChangePasswordCustomer(string mail,string pass)
-        {
-            try
-            {
-                var acc = db.CUSTOMERs.SingleOrDefault(t => t.Email==mail);
-                acc.Pass = Encryptor.MD5Hash(pass);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        #endregion
     }
 }

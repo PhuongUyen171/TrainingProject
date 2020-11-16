@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -14,14 +15,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </head>
-
+@*@{ 
+    var use = (UI.Models.UserLogin)Session[Model.Common.Constants.USER_SESSION];
+        }*@
 <body>
 
     <div class="header">
         <ul>
-            <li><a href="@Url.Action("TuyenDung","Home")">TUYỂN DỤNG</a></li>
-            <li><a href="@Url.Action("GioiThieu","Home")">VỀ MOJI</a></li>
-            <li><a href="@Url.Action("HeThong","Home")">HỆ THỐNG CỬA HÀNG</a></li>
+            <li><a href="@Url.Action("TuyenDung", "Home")">TUYỂN DỤNG</a></li>
+            <li><a href="@Url.Action("GioiThieu", "Home")">VỀ MOJI</a></li>
+            <li><a href="@Url.Action("HeThong", "Home")">HỆ THỐNG CỬA HÀNG</a></li>
         </ul>
     </div>
 
@@ -29,7 +32,7 @@
         <div class="row header2">
             <div class="col-lg-1"></div>
             <div class="col-lg-2">
-                <a href="@Url.Action("Index","Home")">
+                <a href="@Url.Action("Index", "Home")">
                     <img src="../../Content/Image/store_1580801513_542.png" align="center" height="80px" width="100%" style="margin-top:10px" />
                 </a>
             </div>
@@ -42,7 +45,7 @@
                 </form>
             </div>
             <div class="col-lg-2" style="padding-top:35px">
-                @Html.ActionLink("Đăng Nhập", "Login", "User")|@Html.ActionLink("Đăng Ký", "Signin", "User")|<i class="fas fa-cart-arrow-down" style="font-size:20px"></i>
+                  @Html.Action("UserPartial","Home")
             </div>
             <div class="col-lg-1"></div>
         </div>

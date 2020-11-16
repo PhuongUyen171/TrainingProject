@@ -77,7 +77,7 @@
       <PropertyRef Name="GroupID" />
     </Key>
     <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__GroupI__267ABA7A" FromRole="GROUPADMIN" ToRole="EMPLOYEE" />
     <NavigationProperty Name="PERMISIONs" Relationship="Self.FK__PERMISION__Group__398D8EEE" FromRole="GROUPADMIN" ToRole="PERMISION" />
   </EntityType>
@@ -97,7 +97,7 @@
       <PropertyRef Name="NewsID" />
     </Key>
     <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Descrip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="PublishDate" Type="DateTime" Precision="0" />
@@ -109,7 +109,7 @@
     </Key>
     <Property Name="RoleID" Type="Int32" Nullable="false" />
     <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="PerID" Type="Boolean" />
+    <Property Name="PerID" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="GROUPADMIN" Relationship="Self.FK__PERMISION__Group__398D8EEE" FromRole="PERMISION" ToRole="GROUPADMIN" />
     <NavigationProperty Name="ROLE" Relationship="Self.FK__PERMISION__RoleI__38996AB5" FromRole="PERMISION" ToRole="ROLES" />
   </EntityType>

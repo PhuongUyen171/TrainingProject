@@ -39,9 +39,9 @@ namespace BLL
             EMPLOYEE employObj = mapObj.Translate(employInsert);
             return employDal.InsertEmployee(employObj);
         }
-        public bool UpdateEmployee(Model.EmployeeModel employUpdate)
+        public bool UpdateEmployee(EmployeeModel employUpdate)
         {
-            EntityMapper<Model.EmployeeModel, EMPLOYEE> mapObj = new EntityMapper<Model.EmployeeModel, EMPLOYEE>();
+            EntityMapper<EmployeeModel, EMPLOYEE> mapObj = new EntityMapper<EmployeeModel, EMPLOYEE>();
             EMPLOYEE employObj = mapObj.Translate(employUpdate);
             return employDal.UpdateEmployee(employObj);
         }
