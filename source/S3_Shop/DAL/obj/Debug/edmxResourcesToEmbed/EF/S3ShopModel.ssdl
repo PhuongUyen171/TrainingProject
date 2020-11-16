@@ -108,7 +108,7 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
       <PropertyRef Name="GroupID" />
     </Key>
     <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
-    <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="MEMBERSHIP">
     <Key>
@@ -125,7 +125,7 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
       <PropertyRef Name="NewsID" />
     </Key>
     <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
     <Property Name="Images" Type="varchar" MaxLength="50" />
     <Property Name="Descrip" Type="nvarchar(max)" />
     <Property Name="PublishDate" Type="date" />
@@ -137,7 +137,7 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
     </Key>
     <Property Name="RoleID" Type="int" Nullable="false" />
     <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
-    <Property Name="PerID" Type="bit" />
+    <Property Name="PerID" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="PRODUCT">
     <Key>

@@ -16,7 +16,7 @@ namespace DAL.EF
     {
         public int RoleID { get; set; }
         public string GroupID { get; set; }
-        public Nullable<bool> PerID { get; set; }
+        public bool PerID { get; set; }
     
         public virtual GROUPADMIN GROUPADMIN { get; set; }
         public virtual ROLE ROLE { get; set; }

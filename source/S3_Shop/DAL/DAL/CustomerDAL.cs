@@ -77,6 +77,8 @@ namespace DAL.DAL
             }
         }
         #endregion
+
+        #region Get information customer
         public CUSTOMER GetCustomerByID(int id)
         {
             return db.CUSTOMERs.Where(t => t.CustomID == id).FirstOrDefault();
@@ -115,5 +117,6 @@ namespace DAL.DAL
         {
             return db.CUSTOMERs.FirstOrDefault(t => t.Email == mail);
         }
+        #endregion
     }
 }

@@ -12,6 +12,7 @@ using WebMatrix.WebData;
 using System.Net.Mail;
 using System.Net;
 using System.Net.Http.Formatting;
+using UI.Models;
 
 namespace UI.Controllers
 {
@@ -24,7 +25,8 @@ namespace UI.Controllers
             serviceObj = new ServiceRepository();
             url = "https://localhost:44379/api/User_API/";
         }
-        #region quy trình đăng nhập user
+
+        #region chức năng đăng nhập user
         public ActionResult Login()
         {
             return View();
@@ -64,7 +66,7 @@ namespace UI.Controllers
                             //    ckPass.Value = model.Password;
                             //    Response.Cookies.Add(ckPass);
                             //}
-                            return RedirectToAction("Index", "User");
+                            return RedirectToAction("ProfileUser", "User", new { custom=customLogin});
                         }
                     case 0:
                         ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không tồn tại.");
@@ -76,6 +78,34 @@ namespace UI.Controllers
             }
             return this.View();
         }
+        public ActionResult Logout()
+        {
+            try
+            {
+                Session.Remove("USER_SESSION");
+                //if (Response.Cookies["username"] != null)
+                //{
+                //    HttpCookie ckUser = new HttpCookie("username");
+                //    ckUser.Expires = DateTime.Now.AddHours(-48);
+                //    Response.Cookies.Add(ckUser);
+                //}
+                //if (Response.Cookies["password"] != null)
+                //{
+                //    HttpCookie ckPass = new HttpCookie("password");
+                //    ckPass.Expires = DateTime.Now.AddHours(-48);
+                //    Response.Cookies.Add(ckPass);
+                //}
+                Constants.COUNT_LOGIN_FAIL_USER = 0;
+                return RedirectToAction("Index","Home");
+            }
+            catch (Exception)
+            {
+                return View("Login");
+            }
+        }
+        #endregion
+
+        #region chức năng quên mật khẩu
         public ActionResult ForgotPassword()
         {
             return View();
@@ -166,7 +196,7 @@ namespace UI.Controllers
         public ActionResult ResetPassword(ResetPasswordModel model)
         {
             CustomerModel resultReset = GetCustomerByEmail(model.Mail);
-            resultReset.Pass =  model.NewPassword;
+            resultReset.Pass = model.NewPassword;
             HttpResponseMessage responseUpdate = serviceObj.PutResponse(url + "UpdateCustomer", resultReset);
             responseUpdate.EnsureSuccessStatusCode();
             bool result= responseUpdate.Content.ReadAsAsync<bool>().Result;
@@ -176,6 +206,8 @@ namespace UI.Controllers
             return this.View();
         }
         #endregion
+
+        #region chức năng đăng kí
         public ActionResult Signin()
         {
             return View();
@@ -185,6 +217,10 @@ namespace UI.Controllers
         {
             return this.View();
         }
-        
+        #endregion
+        public ActionResult ProfileUser(CustomerModel custom)
+        {
+            return View(custom);
+        }
     }
 }

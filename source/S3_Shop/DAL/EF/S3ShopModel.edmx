@@ -113,7 +113,7 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
             <PropertyRef Name="GroupID" />
           </Key>
           <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="MEMBERSHIP">
           <Key>
@@ -130,7 +130,7 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
             <PropertyRef Name="NewsID" />
           </Key>
           <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
           <Property Name="Images" Type="varchar" MaxLength="50" />
           <Property Name="Descrip" Type="nvarchar(max)" />
           <Property Name="PublishDate" Type="date" />
@@ -142,7 +142,7 @@ warning 6002: The table/view 'QL_Shop.dbo.DISTRICT' does not have a primary key 
           </Key>
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="GroupID" Type="char" MaxLength="10" Nullable="false" />
-          <Property Name="PerID" Type="bit" />
+          <Property Name="PerID" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -537,7 +537,7 @@ warning 6002: The table/view 'QL_Shop.dbo.WARD' does not have a primary key defi
             <PropertyRef Name="GroupID" />
           </Key>
           <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__GroupI__267ABA7A" FromRole="GROUPADMIN" ToRole="EMPLOYEE" />
           <NavigationProperty Name="PERMISIONs" Relationship="Self.FK__PERMISION__Group__398D8EEE" FromRole="GROUPADMIN" ToRole="PERMISION" />
         </EntityType>
@@ -557,7 +557,7 @@ warning 6002: The table/view 'QL_Shop.dbo.WARD' does not have a primary key defi
             <PropertyRef Name="NewsID" />
           </Key>
           <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Images" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descrip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="PublishDate" Type="DateTime" Precision="0" />
@@ -569,7 +569,7 @@ warning 6002: The table/view 'QL_Shop.dbo.WARD' does not have a primary key defi
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="GroupID" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="PerID" Type="Boolean" />
+          <Property Name="PerID" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="GROUPADMIN" Relationship="Self.FK__PERMISION__Group__398D8EEE" FromRole="PERMISION" ToRole="GROUPADMIN" />
           <NavigationProperty Name="ROLE" Relationship="Self.FK__PERMISION__RoleI__38996AB5" FromRole="PERMISION" ToRole="ROLES" />
         </EntityType>

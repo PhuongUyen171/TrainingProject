@@ -17,14 +17,14 @@ namespace BLL
         #region Insert, Update, Delete
         public List<CustomerModel> GetAllCustomers()
         {
-            EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel> mapObj = new EntityMapper<DAL.EF.CUSTOMER, Model.CustomerModel>();
-            List<DAL.EF.CUSTOMER> customList = new CustomerDAL().GetAllCustomers();
-            List<Model.CustomerModel> customers = new List<Model.CustomerModel>();
+            EntityMapper<CUSTOMER, CustomerModel> mapObj = new EntityMapper<CUSTOMER,CustomerModel>();
+            List<CUSTOMER> customList = new CustomerDAL().GetAllCustomers();
+            List<CustomerModel> customers = new List<CustomerModel>();
             foreach (var item in customList)
             {
                 customers.Add(mapObj.Translate(item));
             }
-            return (List<CustomerModel>)customers;
+            return customers;
         }
         public bool InsertCustomer(CustomerModel cusInsert)
         {
@@ -43,6 +43,7 @@ namespace BLL
             return customDal.DeleteCustomer(id);
         }
         #endregion
+
         #region Get by information
         public CustomerModel GetCustomerByID(int id)
         {
