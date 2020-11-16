@@ -34,5 +34,14 @@ namespace API.Controllers
         {
             return cusBll.UpdateCustomer(model);
         }
+        [HttpPost]
+        public long InsertForFacebook(CustomerModel model)
+        {
+            return cusBll.InsertForFacebook(model);
+        }
+        public long InsertForGoogle(CustomerModel model)
+        {
+            return cusBll.InsertForGoogle(model);
+        }
     }
 }

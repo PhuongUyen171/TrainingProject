@@ -84,10 +84,10 @@ namespace UI.Controllers
         {
             serviceObj = new ServiceRepository();
             CustomerModel resultUser=null;
-            UserLogin user = Session[Model.Common.Constants.USER_SESSION] as UserLogin;
+            CustomerModel user = Session[Model.Common.Constants.USER_SESSION] as CustomerModel;
             if (user != null)
             {
-                HttpResponseMessage response = serviceObj.GetResponse(url + "api/User_API/GetCustomerByUsername?user="+ user.UserName);
+                HttpResponseMessage response = serviceObj.GetResponse(url + "api/User_API/GetCustomerByUsername?user="+ user.Username);
                 response.EnsureSuccessStatusCode();
                 resultUser = response.Content.ReadAsAsync<CustomerModel>().Result;
             }

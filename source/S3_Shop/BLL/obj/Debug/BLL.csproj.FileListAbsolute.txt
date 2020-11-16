@@ -50,3 +50,10 @@ C:\Users\PC\Desktop\TrainingProject-feature-sprint-04\source\S3_Shop\BLL\obj\Deb
 C:\Users\PC\Desktop\TrainingProject-feature-sprint-04\source\S3_Shop\BLL\obj\Debug\BLL.csproj.CopyComplete
 C:\Users\PC\Desktop\TrainingProject-feature-sprint-04\source\S3_Shop\BLL\obj\Debug\BLL.dll
 C:\Users\PC\Desktop\TrainingProject-feature-sprint-04\source\S3_Shop\BLL\obj\Debug\BLL.pdb
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\System.Web.Cors.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\System.Web.Http.Common.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\System.Web.Http.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\System.Web.Http.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\BLL\bin\Debug\System.Web.Http.Common.xml

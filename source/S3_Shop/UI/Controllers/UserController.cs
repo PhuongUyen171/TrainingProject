@@ -12,7 +12,9 @@ using WebMatrix.WebData;
 using System.Net.Mail;
 using System.Net;
 using System.Net.Http.Formatting;
-using UI.Models;
+using Facebook;
+using System.Configuration;
+using System.Web.Script.Serialization;
 
 namespace UI.Controllers
 {
@@ -20,6 +22,17 @@ namespace UI.Controllers
     {
         string url;
         ServiceRepository serviceObj;
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallback");
+                return uriBuilder.Uri;
+            }
+        }
         public UserController()
         {
             serviceObj = new ServiceRepository();
@@ -53,18 +66,17 @@ namespace UI.Controllers
                             userSession.UserName = customLogin.Username;
                             userSession.Password = customLogin.Pass;
 
-                            //Chưa xử lý quên mật khẩu
                             Session.Add(Constants.USER_SESSION, userSession);
                             //if (model.RememberMe)
                             //{
-                            //    HttpCookie ckUser = new HttpCookie("username");
-                            //    ckUser.Expires = DateTime.Now.AddHours(48);
-                            //    ckUser.Value = model.UserName;
-                            //    Response.Cookies.Add(ckUser);
-                            //    HttpCookie ckPass = new HttpCookie("password");
-                            //    ckPass.Expires = DateTime.Now.AddHours(48);
-                            //    ckPass.Value = model.Password;
-                            //    Response.Cookies.Add(ckPass);
+                            HttpCookie ckUserAccount = new HttpCookie("usernameCustomer");
+                            ckUserAccount.Expires = DateTime.Now.AddHours(48);
+                            ckUserAccount.Value = model.UserName;
+                            Response.Cookies.Add(ckUserAccount);
+                            HttpCookie ckPassAccount = new HttpCookie("passwordCustomer");
+                            ckPassAccount.Expires = DateTime.Now.AddHours(48);
+                            ckPassAccount.Value = model.Password;
+                            Response.Cookies.Add(ckPassAccount);
                             //}
                             return RedirectToAction("ProfileUser", "User", new { custom=customLogin});
                         }
@@ -82,19 +94,19 @@ namespace UI.Controllers
         {
             try
             {
-                Session.Remove("USER_SESSION");
-                //if (Response.Cookies["username"] != null)
-                //{
-                //    HttpCookie ckUser = new HttpCookie("username");
-                //    ckUser.Expires = DateTime.Now.AddHours(-48);
-                //    Response.Cookies.Add(ckUser);
-                //}
-                //if (Response.Cookies["password"] != null)
-                //{
-                //    HttpCookie ckPass = new HttpCookie("password");
-                //    ckPass.Expires = DateTime.Now.AddHours(-48);
-                //    Response.Cookies.Add(ckPass);
-                //}
+                Session.Remove(Constants.USER_SESSION);
+                if (Response.Cookies["usernameCustomer"] != null)
+                {
+                    HttpCookie ckUserAccount = new HttpCookie("usernameCustomer");
+                    ckUserAccount.Expires = DateTime.Now.AddHours(-48);
+                    Response.Cookies.Add(ckUserAccount);
+                }
+                if (Response.Cookies["passwordCustomer"] != null)
+                {
+                    HttpCookie ckPassAccount = new HttpCookie("passwordCustomer");
+                    ckPassAccount.Expires = DateTime.Now.AddHours(-48);
+                    Response.Cookies.Add(ckPassAccount);
+                }
                 Constants.COUNT_LOGIN_FAIL_USER = 0;
                 return RedirectToAction("Index","Home");
             }
@@ -103,6 +115,7 @@ namespace UI.Controllers
                 return View("Login");
             }
         }
+        
         #endregion
 
         #region chức năng quên mật khẩu
@@ -218,9 +231,126 @@ namespace UI.Controllers
             return this.View();
         }
         #endregion
+
+        #region đăng nhập bằng FB, GG
+        public ActionResult LoginFacebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                response_type = "code",
+                scope = "email",
+            });
+
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+        public ActionResult FacebookCallback(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                code = code
+            });
+
+
+            var accessToken = result.access_token;
+            if (!string.IsNullOrEmpty(accessToken))
+            {
+                fb.AccessToken = accessToken;
+                // Get the user's information, like email, first name, middle name etc
+                dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email");
+                string email = me.email;
+                string userName = me.email;
+                string firstname = me.first_name;
+                string middlename = me.middle_name;
+                string lastname = me.last_name;
+
+                var user = new CustomerModel();
+                user.Email = email;
+                user.Username = email;
+                user.Statu = true;
+
+                user.CustomName = firstname + " " + middlename + " " + lastname;
+                //user.CreatedDate = DateTime.Now;
+
+
+                var resultInsert = InsertByFacebook(user);
+                if (resultInsert > 0)
+                {
+                    var userSession = new UserLogin();
+                    userSession.UserName = email;
+                    userSession.UserID = resultInsert;
+                    Session.Add(Constants.USER_SESSION, userSession);
+
+                    //if (model.RememberMe)
+                    //{
+                    HttpCookie ckUserAccount = new HttpCookie("usernameCustomer");
+                    ckUserAccount.Expires = DateTime.Now.AddHours(48);
+                    ckUserAccount.Value = email;
+                    Response.Cookies.Add(ckUserAccount);
+                    HttpCookie ckIDAccount = new HttpCookie("idCustomer");
+                    ckIDAccount.Expires = DateTime.Now.AddHours(48);
+                    ckIDAccount.Value = resultInsert.ToString();
+                    Response.Cookies.Add(ckIDAccount);
+                }
+            }
+            return Redirect("/");
+        }
+        [HttpPost]
+        public JsonResult LoginGoogle(string googleACModel)
+        {
+            ViewBag.GoogleSignIn = ConfigurationManager.AppSettings["GgAppId"].ToString();
+            var accountSocialsList = new JavaScriptSerializer().Deserialize<List<AccountSocial>>(googleACModel);
+            var accountSocials = accountSocialsList.FirstOrDefault();
+            var memberAccount = new CustomerModel();
+            memberAccount.Email = accountSocials.Email;
+            memberAccount.Username = accountSocials.Email;
+            memberAccount.CustomName = accountSocials.FullName;
+            var resultInsert = InsertByGoogle(memberAccount);
+
+            CustomerModel model = new CustomerModel();
+            model.CustomID = resultInsert;
+            model.CustomName = accountSocials.FullName;
+            model.Username = accountSocials.Email;
+
+            Session.Remove(Constants.USER_SESSION);
+            Session.Add(Constants.USER_SESSION, model);
+
+            HttpCookie ckUserAccount = new HttpCookie("usernameCustomer");
+            ckUserAccount.Expires = DateTime.Now.AddHours(48);
+            ckUserAccount.Value = model.Username;
+            Response.Cookies.Add(ckUserAccount);
+            HttpCookie ckNameAccount = new HttpCookie("passwordCustomer");
+            ckNameAccount.Expires = DateTime.Now.AddHours(48);
+            ckNameAccount.Value = model.CustomName;
+            Response.Cookies.Add(ckNameAccount);
+
+            return Json(new { status = true });
+        }
+        #endregion
         public ActionResult ProfileUser(CustomerModel custom)
         {
             return View(custom);
+        }
+        public int InsertByFacebook(CustomerModel customer)
+        {
+            HttpResponseMessage response = serviceObj.PostResponse(url + "InsertForFacebook/",customer);
+            response.EnsureSuccessStatusCode();
+            int resultInsert = response.Content.ReadAsAsync<int>().Result;
+            return resultInsert;
+        }
+        public int InsertByGoogle(CustomerModel customer)
+        {
+            HttpResponseMessage response = serviceObj.PostResponse(url + "InsertForGoogle/", customer);
+            response.EnsureSuccessStatusCode();
+            int resultInsert = response.Content.ReadAsAsync<int>().Result;
+            return resultInsert;
         }
     }
 }
