@@ -42,6 +42,18 @@ namespace BLL
         {
             return customDal.DeleteCustomer(id);
         }
+        public long InsertForFacebook(CustomerModel cusInsert)
+        {
+            EntityMapper<CustomerModel, CUSTOMER> mapObj = new EntityMapper<CustomerModel, CUSTOMER>();
+            CUSTOMER customObj = mapObj.Translate(cusInsert);
+            return customDal.InsertForFacebook(customObj);
+        }
+        public long InsertForGoogle(CustomerModel cusInsert)
+        {
+            EntityMapper<CustomerModel, CUSTOMER> mapObj = new EntityMapper<CustomerModel, CUSTOMER>();
+            CUSTOMER customObj = mapObj.Translate(cusInsert);
+            return customDal.InsertForGoogle(customObj);
+        }
         #endregion
 
         #region Get by information

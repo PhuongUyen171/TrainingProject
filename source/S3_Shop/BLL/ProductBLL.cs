@@ -70,6 +70,16 @@ namespace BLL
         {
             return proDal.DeleteProduct(id);
         }
-
+        public List<ProductModel> GetProductBySearch(string search)
+        {
+            EntityMapper<DAL.EF.PRODUCT, Model.ProductModel> mapObj = new EntityMapper<DAL.EF.PRODUCT, Model.ProductModel>();
+            List<DAL.EF.PRODUCT> list = new ProductDAL().GetProductsBySearch(search);
+            List<Model.ProductModel> products = new List<Model.ProductModel>();
+            foreach (var item in list)
+            {
+                products.Add(mapObj.Translate(item));
+            }
+            return (List<Model.ProductModel>)products;
+        }
     }
 }

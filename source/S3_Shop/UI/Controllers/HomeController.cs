@@ -84,10 +84,17 @@ namespace UI.Controllers
         {
             serviceObj = new ServiceRepository();
             CustomerModel resultUser=null;
+<<<<<<< HEAD
             UserLogin user = Session[Model.Common.Constants.USER_SESSION] as UserLogin;
             if (user != null)
             {
                 HttpResponseMessage response = serviceObj.GetResponse(url + "api/User_API/GetCustomerByUsername?user="+ user.UserName);
+=======
+            CustomerModel user = Session[Model.Common.Constants.USER_SESSION] as CustomerModel;
+            if (user != null)
+            {
+                HttpResponseMessage response = serviceObj.GetResponse(url + "api/User_API/GetCustomerByUsername?user="+ user.Username);
+>>>>>>> feature/sprint-04
                 response.EnsureSuccessStatusCode();
                 resultUser = response.Content.ReadAsAsync<CustomerModel>().Result;
             }

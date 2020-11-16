@@ -76,6 +76,35 @@ namespace DAL.DAL
                 return false;
             }
         }
+
+        public long InsertForFacebook(CUSTOMER model)
+        {
+            var user = db.CUSTOMERs.SingleOrDefault(x => x.Username == model.Username);
+            if (user == null)
+            {
+                db.CUSTOMERs.Add(model);
+                db.SaveChanges();
+                return model.CustomID;
+            }
+            else
+            {
+                return user.CustomID;
+            }
+        }
+        public long InsertForGoogle(CUSTOMER model)
+        {
+            var user = db.CUSTOMERs.SingleOrDefault(x => x.Username == model.Username);
+            if (user == null)
+            {
+                db.CUSTOMERs.Add(model);
+                db.SaveChanges();
+                return model.CustomID;
+            }
+            else
+            {
+                return user.CustomID;
+            }
+        }
         #endregion
 
         #region Get information customer

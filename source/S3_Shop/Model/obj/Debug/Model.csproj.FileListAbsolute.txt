@@ -63,3 +63,14 @@ C:\Users\PC\Desktop\TrainingProject-feature-sprint-04\source\S3_Shop\Model\obj\D
 C:\Users\PC\Desktop\TrainingProject-feature-sprint-04\source\S3_Shop\Model\obj\Debug\Model.dll
 C:\Users\PC\Desktop\TrainingProject-feature-sprint-04\source\S3_Shop\Model\obj\Debug\Model.pdb
 C:\Users\PC\Desktop\TrainingProject-feature-sprint-04\source\S3_Shop\Model\bin\Debug\AutoMapper.dll
+<<<<<<< HEAD
+=======
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Model\bin\Debug\AutoMapper.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Model\bin\Debug\System.Net.Http.Extensions.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Model\bin\Debug\System.Net.Http.Primitives.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Model\bin\Debug\System.Web.Cors.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Model\bin\Debug\System.Web.Http.Common.dll
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Model\bin\Debug\System.Web.Http.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Model\bin\Debug\System.Web.Http.Common.xml
+C:\Users\uyen.nguyen\Desktop\TrainingProject\source\S3_Shop\Model\obj\Debug\Model.csprojAssemblyReference.cache
+>>>>>>> feature/sprint-04
