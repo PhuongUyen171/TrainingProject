@@ -65,20 +65,22 @@ namespace UI.Controllers
                             var userSession = new UserLogin();
                             userSession.UserName = customLogin.Username;
                             userSession.Password = customLogin.Pass;
+                            userSession.FullName = customLogin.CustomName;
+                            userSession.UserID = customLogin.CustomID;
 
                             Session.Add(Constants.USER_SESSION, userSession);
                             //if (model.RememberMe)
                             //{
                             HttpCookie ckUserAccount = new HttpCookie("usernameCustomer");
                             ckUserAccount.Expires = DateTime.Now.AddHours(48);
-                            ckUserAccount.Value = model.UserName;
+                            ckUserAccount.Value = userSession.UserName;
                             Response.Cookies.Add(ckUserAccount);
-                            HttpCookie ckPassAccount = new HttpCookie("passwordCustomer");
-                            ckPassAccount.Expires = DateTime.Now.AddHours(48);
-                            ckPassAccount.Value = model.Password;
-                            Response.Cookies.Add(ckPassAccount);
+                            HttpCookie ckIDAccount = new HttpCookie("idCustomer");
+                            ckIDAccount.Expires = DateTime.Now.AddHours(48);
+                            ckIDAccount.Value = userSession.UserID+"";
+                            Response.Cookies.Add(ckIDAccount);
                             //}
-                            return RedirectToAction("ProfileUser", "User", new { custom=customLogin});
+                            return RedirectToAction("ProfileUser", "User", new { user=customLogin.Username});
                         }
                     case 0:
                         ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không tồn tại.");
@@ -101,11 +103,11 @@ namespace UI.Controllers
                     ckUserAccount.Expires = DateTime.Now.AddHours(-48);
                     Response.Cookies.Add(ckUserAccount);
                 }
-                if (Response.Cookies["passwordCustomer"] != null)
+                if (Response.Cookies["idCustomer"] != null)
                 {
-                    HttpCookie ckPassAccount = new HttpCookie("passwordCustomer");
-                    ckPassAccount.Expires = DateTime.Now.AddHours(-48);
-                    Response.Cookies.Add(ckPassAccount);
+                    HttpCookie ckIDAccount = new HttpCookie("idCustomer");
+                    ckIDAccount.Expires = DateTime.Now.AddHours(-48);
+                    Response.Cookies.Add(ckIDAccount);
                 }
                 Constants.COUNT_LOGIN_FAIL_USER = 0;
                 return RedirectToAction("Index","Home");
@@ -314,29 +316,38 @@ namespace UI.Controllers
             memberAccount.CustomName = accountSocials.FullName;
             var resultInsert = InsertByGoogle(memberAccount);
 
-            CustomerModel model = new CustomerModel();
-            model.CustomID = resultInsert;
-            model.CustomName = accountSocials.FullName;
-            model.Username = accountSocials.Email;
+            UserLogin u = new UserLogin {
+                UserID = resultInsert,
+                FullName = accountSocials.FullName,
+                UserName=accountSocials.Email,
+                Password=""
+            };
 
             Session.Remove(Constants.USER_SESSION);
-            Session.Add(Constants.USER_SESSION, model);
+            Session.Add(Constants.USER_SESSION, u);
 
             HttpCookie ckUserAccount = new HttpCookie("usernameCustomer");
             ckUserAccount.Expires = DateTime.Now.AddHours(48);
-            ckUserAccount.Value = model.Username;
+            ckUserAccount.Value = u.UserName;
             Response.Cookies.Add(ckUserAccount);
-            HttpCookie ckNameAccount = new HttpCookie("passwordCustomer");
-            ckNameAccount.Expires = DateTime.Now.AddHours(48);
-            ckNameAccount.Value = model.CustomName;
-            Response.Cookies.Add(ckNameAccount);
+            HttpCookie ckIDAccount = new HttpCookie("idCustomer");
+            ckIDAccount.Expires = DateTime.Now.AddHours(48);
+            ckIDAccount.Value = u.UserID+"";
+            Response.Cookies.Add(ckIDAccount);
 
             return Json(new { status = true });
         }
         #endregion
-        public ActionResult ProfileUser(CustomerModel custom)
+        [HttpGet]
+        public ActionResult ProfileUser(string usr)
         {
-            return View(custom);
+            CustomerModel cus = GetCustomerByUsername(usr);
+            return View(cus);
+        }
+        [HttpPost]
+        public ActionResult ProfileUser(CustomerModel model)
+        {
+            return View();
         }
         public int InsertByFacebook(CustomerModel customer)
         {
@@ -351,6 +362,36 @@ namespace UI.Controllers
             response.EnsureSuccessStatusCode();
             int resultInsert = response.Content.ReadAsAsync<int>().Result;
             return resultInsert;
+        }
+        public CustomerModel GetCustomerByUsername(string user)
+        {
+            HttpResponseMessage response = serviceObj.GetResponse(url + "GetCustomerByUsername?user=" + user);
+            response.EnsureSuccessStatusCode();
+            CustomerModel result = response.Content.ReadAsAsync<CustomerModel>().Result;
+            return result;
+        }
+        public JsonResult GetAuthenticationInEmail(string Email)
+        {
+            var findThisEmail = GetCustomerByEmail(Email);
+            if (findThisEmail == null)
+            {
+                Session[Constants.AUTHENTICATIONEMAIL_SESSION] = null;
+                int authCode = new Random().Next(1000, 9999);
+                AuthenticationEmail authenticationEmail = new AuthenticationEmail();
+                authenticationEmail.Email = Email;
+                authenticationEmail.AuthenticationCode = authCode.ToString();
+                Session[Constants.AUTHENTICATIONEMAIL_SESSION] = authenticationEmail;
+
+                MailHelper.SendMailAuthentication(Email, "Mã xác thực từ Knowledge Store", authCode.ToString());
+
+                return Json(new { status = true });
+            }
+            else
+                return Json(new { status = false });
+        }
+        public ActionResult UserPartial()
+        {
+            return PartialView();
         }
     }
 }

@@ -1,26 +1,26 @@
-﻿@model Model.CustomerModel
+﻿@model UI.Models.UserLogin
 @*<link href="~/Content/cssMain.css" rel="stylesheet" />*@
 <div class="account_user">
-    @{
-
-        if (Session["USER_SESSION"] != null)
+    @{ 
+        UI.Models.UserLogin cus = Session["USER_SESSION"] as UI.Models.UserLogin;
+        if (cus != null)
         {
+
             <ul>
-                <li>@Model.CustomName</li>
+                <li><a href="@Url.Action("ProfileUser","User",new { usr = cus.UserName})">@cus.FullName</a></li>
+                @*<li>@Html.ActionLink(custom.FullName, "ProfileUser", "User", new { user = custom.UserName })</li>*@
                 <li>@Html.ActionLink("Thoát", "Logout", "User")</li>
                 <li><i class="fas fa-cart-arrow-down" style="font-size:20px"></i></li>
-            </ul>
+            </ul> 
         }
         else
         {
-            <ul>
-                <li>@Html.ActionLink("Đăng nhập", "Login", "User")</li>
-                <li>@Html.ActionLink("Đăng ký", "Signin", "User")</li>
-                <li><i class="fas fa-cart-arrow-down" style="font-size:20px"></i></li>
-            </ul>
-        }
-
-    }
+        <ul>
+            <li>@Html.ActionLink("Đăng nhập", "Login", "User")</li>
+            <li>@Html.ActionLink("Đăng ký", "Signin", "User")</li>
+            <li><i class="fas fa-cart-arrow-down" style="font-size:20px"></i></li>
+        </ul> 
+        } }
 </div>
 <style>
     .account_user {
@@ -46,4 +46,5 @@
                     color: #ffb0bd;
                 }
 </style>
+
 

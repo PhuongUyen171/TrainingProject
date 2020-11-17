@@ -11,6 +11,8 @@ using Model.Common;
 
 namespace UI.Areas.Admin.Controllers
 {
+    //[RouteArea("Admin")]
+    //[Route("admin/[controller]")]
     public class LoginController : Controller
     {
         string url;

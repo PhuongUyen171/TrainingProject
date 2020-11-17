@@ -80,20 +80,24 @@ namespace UI.Controllers
 
             return View(list);
         }
-        public ActionResult UserPartial()
+        public ActionResult SearchPartial()
         {
-            serviceObj = new ServiceRepository();
-            CustomerModel resultUser=null;
-            CustomerModel user = Session[Model.Common.Constants.USER_SESSION] as CustomerModel;
-            if (user != null)
-            {
-                HttpResponseMessage response = serviceObj.GetResponse(url + "api/User_API/GetCustomerByUsername?user="+ user.Username);
-                response.EnsureSuccessStatusCode();
-                resultUser = response.Content.ReadAsAsync<CustomerModel>().Result;
-            }
-            return PartialView(resultUser);
+            return PartialView();
         }
         #endregion
+
+        [HttpPost]
+        public ActionResult SearchProducts(FormCollection c)
+        {
+            var url = "https://localhost:44379/";
+            ServiceRepository serviceObj = new ServiceRepository();
+            //List sản phẩm
+            var tim = c["searchText"];
+            HttpResponseMessage responseListProduct = serviceObj.GetResponse(url + "api/Product_API/GetProductsBySearch?tim=" + tim);
+            responseListProduct.EnsureSuccessStatusCode();
+            List<Model.ProductModel> list = responseListProduct.Content.ReadAsAsync<List<Model.ProductModel>>().Result;
+            return View(list);
+        }
         //public ActionResult ChiNhanhHaNoi()
         //{
         //    var hn = data.CUAHANGs.Where(m => m.Vung == "HN");

@@ -272,6 +272,7 @@
     <Content Include="Areas\Admin\Views\Customer\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Employee\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Voucher\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1-vsdoc.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -290,10 +291,12 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Admin\Controllers\GroupAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\MembershipController.cs" />
     <Compile Include="Areas\Admin\Controllers\PermisionController.cs" />
@@ -308,11 +311,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountSocial.cs" />
+    <Compile Include="Models\AuthenticationEmail.cs" />
     <Compile Include="Models\EmailManager.cs" />
     <Compile Include="Models\Encrypt.cs" />
     <Compile Include="Models\ForgotPasswordModel.cs" />
     <Compile Include="Models\HasPermisionAttribute.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MailHelper.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\UserLogin.cs" />
@@ -348,8 +353,10 @@
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\Shared\404.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
-    <Content Include="Views\Home\UserPartial.cshtml" />
     <Content Include="Views\User\ProfileUser.cshtml" />
+    <Content Include="Views\Home\SearchProducts.cshtml" />
+    <Content Include="Views\Home\SearchPartial.cshtml" />
+    <Content Include="Views\User\UserPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -360,6 +367,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\AdminUser\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
